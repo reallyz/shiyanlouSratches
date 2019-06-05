@@ -1,0 +1,33 @@
+#只有有连续三个字符：
+def checkio(words: str) -> bool:
+    a=words
+    l=a.split()
+    t=0
+    for i in l:
+        if i.isalpha():
+            t +=1
+            if t==3:
+                break
+        else:
+            t=0
+    if t>=3:
+        return True
+    else:
+        return False
+正则表达式：
+def checkio(words: str) -> bool:
+
+    import re
+
+    pattern = r'[a-zA-Z]+\s[a-zA-Z]+\s[a-zA-Z]+'
+
+    match = re.search(pattern,words)
+
+    if match == None:
+
+        return False 
+
+    else:
+
+        return True
+

@@ -1,0 +1,27 @@
+def checkio(*args:tuple):
+    if len(args):
+        s=args[0]
+        if isinstance(s,(int,float)):
+            return max(args)-min(args)
+        else:
+            t=()
+            for i in s:
+                if isinstance(i,int):
+                    i=(i,)
+                elif isinstance(i,(str,list)):
+                    i=tuple(i)
+                else:
+                    i
+                t=t+i
+            output=max(t)-min(t)
+            return output
+    else:
+        return 0
+if __name__ == '__main__':
+    def almost_equal(checked, correct, significant_digits):
+        precision = 0.1 ** significant_digits
+        return correct - precision < checked < correct + precision
+
+
+    print('Example:')
+    print(checkio(((1, 2, 3), 89)))
