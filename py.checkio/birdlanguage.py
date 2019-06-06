@@ -1,5 +1,6 @@
 VOWELS = "aeiouy"
 print('test')
+print('pull first')
 
 def translate(phrase):
     vowels= "aeiouy"
