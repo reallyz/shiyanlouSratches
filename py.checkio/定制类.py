@@ -89,6 +89,8 @@ class urls(Chain):
     def __len__(self):
         return 'guess what?!'
 f=urls()
+print(isinstance(urls().urls,urls))
+print(isinstance(urls().urls,Chain)) #urls类没有__getattr__方法，去调用Chain的__getattr__方法，类就改变了
 print(urls().urls('Tom').repos)
 
 
