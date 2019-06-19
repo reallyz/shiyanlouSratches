@@ -26,3 +26,19 @@ ww(12)
 Out[87]: False
 '''
 #闭包：内部函数使用了外部函数的临时变量，外部函数返回内部函数的引用
+def now():
+    print("what time is it?")
+
+
+import functools
+def log(func,*text):
+    @functools.wraps(func)
+    def wrapper(*args,**kwargs):
+        print('call who?call %s %s'%(text,func.__name__))
+        return func(*args,**kwargs)
+    return wrapper
+
+
+f=log(now)
+print(f.__name__)
+f()
