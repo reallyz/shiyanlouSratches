@@ -1,5 +1,8 @@
 注意：sort 可以指定key(一大堆骚操作）
-Key functions need not access data internal to objects being sorted. A key function can also access external resources. For instance, if the student grades are stored in a dictionary, they can be used to sort a separate list of student names:
+Key functions need not access data internal to objects being sorted.
+A key function can also access external resources. For instance,
+if the student grades are stored in a dictionary,
+they can be used to sort a separate list of student names:
     >>> students = ['dave', 'john', 'jane']
     >>> newgrades = {'john': 'F', 'jane':'A', 'dave': 'C'}
     >>> sorted(students, key=newgrades.__getitem__)
