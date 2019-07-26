@@ -9,7 +9,7 @@ def getText():
 
 
 hamlet=getText()
-worldc=WordCloud().generate(hamlet)
+worldc=WordCloud(background_color='white').generate(hamlet)
 plt.imshow(worldc)
 plt.axis('off')
 plt.show()
@@ -28,6 +28,11 @@ for i in range(10):
 import jieba
 txt1=open('threekingdoms.txt','r',encoding='utf-8').read()
 words1=jieba.lcut(txt1)
+tkdwc=' '.join(words1)
+w=WordCloud(width=1000,height=700,max_words=60,font_path='/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf')
+plt.imshow(w.generate(tkdwc))
+plt.axis('off')
+plt.show()
 counts1={}
 for word in words1:
     if len(word)==1:
