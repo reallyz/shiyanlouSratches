@@ -1,5 +1,5 @@
 import requests
-
+#获取信息
 #get方法,通用代码框架，更稳定的可靠,异常处理很重要
 
 def gethtml(url,**para):#**para是一个dict
