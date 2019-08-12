@@ -14,6 +14,12 @@ np.resize(b,(5,4))
 b.reshape((2,10))
 print(b.flatten())
 #类型转换
+#类型创建(dtype),可以预定义类型，计算更快dtype=
+#example
+student=np.dtype([('name','S20'),('age','i1'),('marks','f4')])
+print(type(student),student)
+a=np.array([('Tom',12,90),('Jack',13,91)],dtype=student)
+print(a,a[1])
 c=b.astype(np.float)
 print(c)
 #索引与切片，由外层到内层
