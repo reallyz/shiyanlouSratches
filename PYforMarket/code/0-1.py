@@ -1,7 +1,9 @@
-import tushare
-import pandas as pd
-import datetime
 import os
+
+import pandas as pd
+import tushare
+
+
 #cn
 def stockprice(ticker,folder):
     # 1 get data online
@@ -27,7 +29,8 @@ tickersRawData.to_csv(path)
 
 
 for i,ticker in enumerate(tickers):
-    print(i,'/',len(tickers),end='\r')
+    print(i,'/',len(tickers))
+    #time.sleep(2)
     try:
         stockprice(ticker,folder='../data/eachstock/')
     except:
