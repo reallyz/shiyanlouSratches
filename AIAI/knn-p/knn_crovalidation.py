@@ -14,7 +14,7 @@ best_k=ks[0]
 best_score=0
 for k in ks:
     curr_score=0
-    for train_index,valid_index in kf.split(data):
+    for train_index,valid_index in kf.split(data):# kfold返回的是切割成K份的索引
         clf=KNeighborsClassifier(n_neighbors=k)
         clf.fit(data[train_index],target[train_index])
         curr_score=curr_score+clf.score(data[valid_index],target[valid_index])
