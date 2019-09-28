@@ -25,6 +25,7 @@ for k in ks:
     print('current score is :{:.2%},best k is:{}'.format(best_score,best_k
                                                         ))
 print('after cross validation the best k is :{}'.format(best_k))
+#搜索最佳参数的函数
 '''
 模型选择函数GridSearch（网格搜索）不仅能搜索最佳参数，还能搜索最佳优化函数
 para={'n_neighbors:[1,3,5,7,9,11]'}
