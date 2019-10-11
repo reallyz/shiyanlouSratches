@@ -40,6 +40,8 @@ dft['Sex'][dft['Sex']=='female']=0
 #Cabin 填充为0
 dft['Cabin']=dft['Cabin'].fillna(0)         #df['Cabin'].fillna(0,inplace=True)
 gender=dft['Sex'].value_counts()
+gender.plot.bar()
+plt.show()
 #把年龄分类，空值用平均值填充
 dft['Age'].fillna(dft['Age'].mean(),inplace=True)
 #pd.cut分箱操作，还有打标功能
