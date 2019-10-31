@@ -15,7 +15,10 @@ class Student():
     student_graduated=0
     student__namelist=[]
     student_graduated_namelist=[]
-
+    # python是动态语言，可以随时绑定方法和属性（方法？）
+    # Student的类的实例只能拥有以下属性，Student的子类不受约束
+    #__slots__ = {'name','age','gender'}
+    # 实例化
     def __init__(self,name,age,gender):
         #实例可以动态绑定属性
         self.name=name
@@ -25,6 +28,7 @@ class Student():
         self.times=0
         Student.__student_total+=1
         Student.student__namelist.append(name)
+    #     属性保护
     @property
     def gage(self):
         return self.age
@@ -53,13 +57,13 @@ class Student():
             return f'sorry you haven\'t meet the line,your mean score is{self.__score/self.times}'
         else:
             return 'congratulations'
-    #使用方法修改变量，可以避免无效参数的传入
+    #类方法修改变量，可以避免无效参数的传入，也可以避免实例化，命名空间更整洁
     @classmethod
     def get_graducated_student(cls,):
         return  Student.student_graduated
-
-    @classmethod
-    def get_gra_stulist(cls,):
+    #静态方法，不用传参数cls,但也就不能使用cls().方法/属性
+    @staticmethod
+    def get_gra_stulist():
         return Student.student_graduated_namelist
     @classmethod
     def get_nstu(cls,):
@@ -79,3 +83,5 @@ print(Student.get_nstu())
 print(Student.__student_total)
 print(globals())
 print(locals())
+
+#类之间的关系（is-a(继承),has-a(关联),use-a(依赖）
