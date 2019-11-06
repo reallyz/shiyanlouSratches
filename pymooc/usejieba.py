@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
+'''
 def getText():
     txt=open('hamlet.txt','r',encoding='utf-8').read()
     txt=txt.lower()
@@ -24,12 +25,15 @@ for i in range(10):
     word,count=items[i]
     print("{0:<10}{1:>5}".format(word,count))
 
-
+'''
 import jieba
-txt1=open('threekingdoms.txt','r',encoding='utf-8').read()
+txt1=open(r'C:\Users\HP\Desktop\nex1.txt','r',encoding='utf-8').read()
 words1=jieba.lcut(txt1)
 tkdwc=' '.join(words1)
-w=WordCloud(width=1000,height=700,max_words=60,font_path='/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf')
+font=r'C:\Windows\Fonts\simhei.ttf'
+stop_words=['2018','VW001.001','VW001','讲话']
+w=WordCloud(width=1000,height=700,max_words=60,collocations=False,font_path=font,stopwords=stop_words)
+#w=WordCloud(width=1000,height=700,max_words=60,font_path='/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf')
 plt.imshow(w.generate(tkdwc))
 plt.axis('off')
 plt.show()
