@@ -54,3 +54,4 @@ next(handler)
 apply_async(add,(12,13),callback=handler.send)
 apply_async(add,(13,14),callback=handler.send)
 
+# test if token is working
