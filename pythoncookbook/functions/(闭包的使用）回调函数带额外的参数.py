@@ -53,5 +53,8 @@ print(dir(handler))
 next(handler)
 apply_async(add,(12,13),callback=handler.send)
 apply_async(add,(13,14),callback=handler.send)
-
-# test if token is working
+# 生成器的send(args)方法带的参数能实现与环境交互
+# send(args)的参数会作为yield函数的返回值,
+# 0.程序执行的时候在yield处就挂起了
+# 1.等待send(args),的agrs作为yiled返回值
+# 2.下次next,又在yield处挂起
