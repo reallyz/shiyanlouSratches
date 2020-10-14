@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import bs4
 from sys import path
-path.append('/root/PycharmProjects/shiyanlouSratches/PYvs')
+path.append('/root/PycharmProjects/shiyanlouSratches/Python_北京理工大学')
 import lrequests as lre
 
 

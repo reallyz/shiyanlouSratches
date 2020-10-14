@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from sys import path
 import re
-path.append('/root/PycharmProjects/shiyanlouSratches/PYvs')
+path.append('/root/PycharmProjects/shiyanlouSratches/Python_北京理工大学')
 import lrequests as lre
 #信息提取
 url='http://python123.io/ws/demo.html'

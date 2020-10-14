@@ -1,0 +1,13 @@
+﻿字典创建主要有四种方式：
+1.直接赋值法：
+            d1={}
+            d1[key]=value
+            d2=dict(s=1,d=2)
+2.二元组的方法：
+            d3=dict([(key,value)])
+            d4=dict(zip(s1,s2))
+3.字典推导式：
+            d5={i:2*i for i in range(3)}
+4.通过dict.fromkeys():
+            通常用来初始化字典
+            d6=dict.fromkeys(list,x)

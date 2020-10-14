@@ -4,6 +4,8 @@
 '''
 思路是，加法思路，如果#在行中，就加一行，然后题目要求的是，如果全零行在中间，也要算进面积
 于是设置了判定在中间的条件，但是还有另一种情况，就是首行是全零后，中间行也是全零就失效了比如64行的那种情况
+但是64行的特征是0行连续
+另一个方法：坐标重合围成面积来算
 '''
 def house(plan):
     # outtemp=plan.splitlines()
@@ -31,7 +33,7 @@ def house(plan):
                 height += 1
 
     area = width * height
-
+    print(area)
     return area
 
 
@@ -61,10 +63,7 @@ if __name__ == '__main__':
 0000000000
 ''') == 30
 
-    assert house('''0000
-0000
-#000
-''') == 1
+
 
     assert house('''0000
 0000
@@ -75,5 +74,10 @@ if __name__ == '__main__':
 0000
 #00#
 ''') == 12
+assert house('''
+0000
+0000
+#000
+''') == 1
 
-    print("Coding complete? Click 'Check' to earn cool rewards!")
+print("Coding complete? Click 'Check' to earn cool rewards!")
