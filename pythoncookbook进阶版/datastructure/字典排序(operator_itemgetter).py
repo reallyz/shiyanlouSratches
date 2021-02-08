@@ -25,6 +25,7 @@ rows = [
     {'fname': 'John', 'lname': 'Cleese', 'uid': 1001},
     {'fname': 'Big', 'lname': 'Jones', 'uid': 1004}
 ]
+# 这里传入的元素是,数据结构的第一层，传入的是rows[0]
 print(max(rows,key=lambda d:d['fname']))
 
 #排序

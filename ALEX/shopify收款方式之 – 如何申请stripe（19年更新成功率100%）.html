@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>shopify收款方式之 &#8211; 如何申请stripe（19年更新成功率100%）</title>
+<meta name="description" content="Shopify收款方式是影响用户支付最重要的部分，也是每个shopify新手都会面对的难题，奈何国内某种不良风气使得各种付款通道对中国各种不平的对待，甚至直接不开放。那么我们就目前环境来说，建议使用的收款方式有Paypal和Stripe，其实也只有这两个，没有别的选择。" />
+<meta name="keywords" content="shopify开店,shopify支付,shopify收款,shopify教程" />
+<link rel="apple-touch-icon" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/images/icon_32.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/images/icon_152.png">
+<link rel="apple-touch-icon" sizes="167x167" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/images/icon_167.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/images/icon_180.png">
+<link rel="icon" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/images/icon_32.png" type="image/x-icon">
+<link rel="stylesheet" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/css/font-awesome.min.css">
+<script type="text/javascript" src="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/js/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/style.css">
+<link rel="pingback" href="https://www.shopifynotes.com/xmlrpc.php" />
+<meta name="dc.title" content="shopify收款方式之 - 如何申请stripe（19年更新成功率100%）" />
+<meta name="dc.description" content="介绍中国区三种申请stripe账号的方法100%成功。1.以美国身份申请。2.开设香港银行卡以香港身份开设。3.申请欧洲区低费率账号，不需要欧洲银行卡。19年亲测更新成功率100%。" />
+<meta name="dc.relation" content="https://www.shopifynotes.com/shopify54.html/" />
+<meta name="dc.source" content="https://www.shopifynotes.com/" />
+<meta name="dc.language" content="zh_CN" />
+<meta name="description" content="介绍中国区三种申请stripe账号的方法100%成功。1.以美国身份申请。2.开设香港银行卡以香港身份开设。3.申请欧洲区低费率账号，不需要欧洲银行卡。19年亲测更新成功率100%。" />
+<link rel="canonical" href="https://www.shopifynotes.com/shopify54.html/" />
+
+<script async src='https://www.googletagmanager.com/gtag/js?id=UA-110013720-3'></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+jQuery(document).ready(function() {
+	jQuery('a[target="_blank"]').click(function(e) {
+		gtag('event', 'click', {'event_category': 'external links','event_label' : this.href});
+	});
+});
+gtag('config', 'UA-110013720-3' , {'allow_display_features': false,});
+
+</script>
+<style type="text/css">
+a{color:#393e46}
+a:hover{color:#00adb5!important}
+#header{background-color:#393e46}
+.widget .widget-title::after{background-color:#393e46}
+.uptop{border-left-color:#393e46}
+#titleBar .toggle:before{background:#393e46}
+</style>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110013720-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-110013720-3');
+</script>
+
+</head>
+
+<body>
+<header id="header">
+    <div class="avatar"><a href="https://www.shopifynotes.com" title="Shopify跨境电商独立站笔记"><img src="https://shopifynotes.com/wp-content/uploads/2018/04/shopify笔记.jpg" alt="Shopify跨境电商独立站笔记" class="img-circle" width="50%"></a></div>
+    <h1 id="name"><a href="https://www.shopifynotes.com" title="Shopify跨境电商独立站笔记" style="color:#fff">Alex是大叔</a></h1>
+    <div class="sns">
+                                            </div>
+    <div class="nav">
+        <ul><li><a href="https://shopifynotes.com/">首页</a></li>
+<li><a href="https://www.shopifynotes.com/shopifycategory/shopify-facebook-ads">Facebook广告教程</a></li>
+<li><a href="https://www.shopifynotes.com/shopifycategory/shopifynotes">Shopify操作笔记</a></li>
+<li><a href="https://www.shopifynotes.com/shopifycategory/shopify-tips">Shopify小技巧</a></li>
+</ul>    </div>
+    </header>
+
+<div id="main">
+    <article class="col-md-8 col-md-offset-2 view clearfix">
+        <h1 class="view-title">shopify收款方式之 &#8211; 如何申请stripe（19年更新成功率100%）</h1>
+        <div class="view-meta">
+            <span>作者: Alex是大叔</span>
+            <span>分类: <a href="https://www.shopifynotes.com/shopifycategory/shopifynotes" rel="category tag">Shopify独立站操作笔记</a></span>
+            <span>发布时间: 2019-01-01 23:49</span>
+            <span></span>
+        </div>
+        <div class="view-content">
+<p><strong>Shopify收款方式</strong>是影响用户支付最重要的部分，也是每个shopify新手都会面对的难题，奈何国内某种不良风气使得各种付款通道对中国各种不平的对待，甚至直接不开放。那么我们就目前环境来说，建议使用的收款方式有Paypal和Stripe，其实也只有这两个，没有别的选择。</p>
+<p>&nbsp;</p>
+<p><strong>Paypal：</strong>相对来说好开一些，但是后期也有很多坑，我单开了一篇文章专门讲<a href="https://www.shopifynotes.com/shopify55.html" target="_blank" rel="noopener"><strong>shopify收款方式之 &#8211; Paypal那些坑</strong></a>，强烈建议去了解一下，会少走很多弯路。</p>
+<p>&nbsp;</p>
+<p><strong>Stripe：</strong>相对于paypal，stripe相对显得有点陌生，它是外国一家信用卡收款渠道，近些年发展迅猛，而且接口友好，支付成功率高，在国外市场占有率相当高。但是官方表明暂不支持中国商家接入。。一开始我也是找遍了国内外个个网站，搜到了一些攻略，在走了无数弯路之后终于搞定。在这里我介绍两种申请方式，都可以尝试：</p>
+<p>&nbsp;</p>
+<p>1.申请的时候国家选美国，先随便伪造一个外国地址，然后去淘宝申请一个EIN，这个用于跟客服沟通。SSN那里没有办法，只能填EIN或者随便先写一个，美国手机号最好不要用虚拟电话，这个也可以通过淘宝解决。下边的银行地址一定要填美国的银行，但是我们作为中国人没有美国银行，也有办法，在网上注册一张<a href="https://share.payoneer.com/nav/mT93TahkKvdZjfRrklju_gb_E5q8VnoRPAm69QK5OyzqYDfALXqyfc01vLTCyIjuXjyhaBhu3laFmnyOOZEhfg2" target="_blank" rel="noopener"><strong>Payoneer卡</strong></a>，这个相当于是一张美国的虚拟卡，但是可以用于亚马逊收款等，国人都可以注册没有限制，而且还可以在后台申请一张<a href="https://share.payoneer.com/nav/mT93TahkKvdZjfRrklju_gb_E5q8VnoRPAm69QK5OyzqYDfALXqyfc01vLTCyIjuXjyhaBhu3laFmnyOOZEhfg2" target="_blank" rel="noopener"><strong>Payoneer实体信用卡</strong></a>，这个卡和虚拟卡里的金额是互通的。这有什么用呢，<strong>用处对于我们做速卖通Dropshipping的人来说相当大！！</strong>因为它可以用来在速卖通下单！！现在的速卖通是不知道中国的信用卡付款的，而这张<strong><a href="https://share.payoneer.com/nav/mT93TahkKvdZjfRrklju_gb_E5q8VnoRPAm69QK5OyzqYDfALXqyfc01vLTCyIjuXjyhaBhu3laFmnyOOZEhfg2" target="_blank" rel="noopener">Payoneer实体信用卡</a></strong>相当于是美国的，所以可以下单。收款收来的钱然后拿来直接进货，岂不是美滋滋。</p>
+<p>接着说stripe，提交资料之后看起来账户是active的但是不能用，耐心等待两天，等他给你发邮件，一般会说需要你什么资料，验证护照或者验证信用卡，然后就按他说的做就行了。<s>接下来几天就会出结果，亲测可行，最近实验成功是在2018年2月份。</s><strong>用EIN申请发方法已经失效，具体看底部更新。</strong></p>
+<p>当然也有些朋友申请失败的，这里说几点需要注意的：1.提交的网站要看起来专业，最好先上一些高逼格产品，不能太杂货店。2.网站要写清楚邮箱，电话，退换货政策，隐私政策。3.认证信用卡时要用国内的visa或者万事达能刷美金的卡（提醒千万不要用广发会验证失败到账申请失败）。其他的就看缘分了，stripe申请会有一定失败几率，不过没关系，还有另外的方法。</p>
+<p>&nbsp;</p>
+<p>2.申请的时候<s>国家</s>哦不地址选香港，这个的前提是你要有一张香港本地的银行卡，汇丰民生渣打什么的都可以。这个方法门槛稍微高一些但是成功率100%，使用上边方法没有成功的人可以想想办法办一张香港卡，其实也不难办，一般预存10万左右就可以内地认证开户，香港都不用去的，具体细节打电话问每个银行。申请时候地址和身份证随便填，但是电话，<strong>注意</strong>电话一定要用真实的香港电话，因为要收验证码。这个也很好办，百度搜索易博通。提交之后也是过几天会验证一下你的护照，然后就OK啦。(现在可以代办工商银行香港分行虚拟卡+stripe，使开办香港stripe门槛降低)</p>
+<p>&nbsp;</p>
+<p>Stripe使用的时候也要注意，不要经常用不同IP登录，填好收款账户就不用管了，会自动打款到香港账户。以前可以快到隔日打款，现在好像只能7天打款了，不过和Paypal相比还是良心一些</p>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>
+<p><b>19年更新：</b></p>
+<p>&nbsp;</p>
+<p>第一种方法用美国身份P卡收款已经失效，很多朋友用这个方法已经申请不下来了，成功率几乎为0，主要是没有ssn验证不了身份。</p>
+<p>最稳妥的申请渠道仍然是通过开香港银行账户，但现在个人开设香港银行实体账户门槛越来越高，成本很大，代办的价格在3000-5000不等，而且需要预存10-20万港币，虽然后期可以把钱转出来，但是卡里钱不够的话每年要交1000人民币左右的服务费，推荐有经济实力的朋友选择这个方法。</p>
+<p>现在有朋友专门做stripe<b>欧洲区和香港区账号</b>代办，香港区是代办工商银行香港分行虚拟卡+Stripe，欧洲区是Payoneer虚拟卡+Stripe。亲测个人资料完全可以开下来，<b>100%成功率</b>，但是需要支付一次性费用<s>2000多</s>涨价了现在3000，<s>如果需要可以在底部留言，我单发给你联系方式。</s>太多人问了，我嫌麻烦直接放联系方式了：</p>
+<blockquote><p><strong>QQ：</strong>1973268218</p>
+<p><strong>微信：</strong>stripeme</p></blockquote>
+<p><b>需要的资料：</b></p>
+<p>1.真实姓名</p>
+<p>2.用于验证stipe的网站</p>
+<p>3.<b><a href="https://share.payoneer.com/nav/mT93TahkKvdZjfRrklju_gb_E5q8VnoRPAm69QK5OyzqYDfALXqyfc01vLTCyIjuXjyhaBhu3laFmnyOOZEhfg2" target="_blank" rel="noopener">Payoneer卡</a>，申请成功之后在账号里选择欧元卡即可</b></p>
+<p>4.国内接收验证码的手机号</p>
+<p>5.国内身份证正反面</p>
+<p>6.gmail邮箱一个</p>
+<p>&nbsp;</p>
+<p>适合个人，开不了香港账号的卖家，3000多代办费不多也不少，根据你个人经济能力决定。小卖家刚启动时完全可以只通过paypal来收款，影响不了太多转化率，能差个20-30%，等到成熟稳定了再考虑代办stripe。</p>
+<p><b>注：</b>5天左右能下号，负责账号后续的一切问题（不包括卖FP，炸单，货不对板等等）。</p>
+<p>&nbsp;</p>
+        </div>
+        <section class="view-tag">
+            <div class="pull-left"><i class="fa fa-tags"></i> <a href="https://www.shopifynotes.com/shopifytag/shopify%e5%bc%80%e5%ba%97" rel="tag">shopify开店</a><a href="https://www.shopifynotes.com/shopifytag/shopify%e6%94%af%e4%bb%98" rel="tag">shopify支付</a><a href="https://www.shopifynotes.com/shopifytag/shopify%e6%94%b6%e6%ac%be" rel="tag">shopify收款</a><a href="https://www.shopifynotes.com/shopifytag/shopify%e6%95%99%e7%a8%8b" rel="tag">shopify教程</a></div>
+        </section>
+                <section id="comments">
+            
+<div class="comment-head clearfix">
+    <div class="pull-left">76条评论</div>
+    <div class="pull-right"><a href="#respond"><i class="fa fa-pencil"></i> 添加新评论</a></div>
+</div>
+<ul>
+    <li id="comment-li-10" class="comment_li">
+    <div id="comment-10">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/d0f28f68cda53d1940ae0e4c3471e16a?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/d0f28f68cda53d1940ae0e4c3471e16a?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='http://www.tilamibag.com' rel='nofollow' target='_blank'>Grace</a></p>
+                <p class="comment_time">2018年4月26日 下午3:15</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=10#respond' onclick='return addComment.moveForm( "comment-10", "10", "respond", "54" )' aria-label='回复给Grace'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>满满的干货！！</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-29" class="comment_li">
+    <div id="comment-29">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/ea6a3de13c4cbef5f6433df5900d35ee?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/ea6a3de13c4cbef5f6433df5900d35ee?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Terry</p>
+                <p class="comment_time">2018年6月9日 下午3:34</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=29#respond' onclick='return addComment.moveForm( "comment-29", "29", "respond", "54" )' aria-label='回复给Terry'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>香港的一定要验证护照还是也是验证护照或者信用卡？</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-57" class="comment_li">
+    <div id="comment-57">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2018年7月19日 上午12:11</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=57#respond' onclick='return addComment.moveForm( "comment-57", "57", "respond", "54" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>只验证护照和手机号</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-33" class="comment_li">
+    <div id="comment-33">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/ea6a3de13c4cbef5f6433df5900d35ee?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/ea6a3de13c4cbef5f6433df5900d35ee?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Terry</p>
+                <p class="comment_time">2018年6月19日 下午3:14</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=33#respond' onclick='return addComment.moveForm( "comment-33", "33", "respond", "54" )' aria-label='回复给Terry'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>按照大叔的推荐，<br />
+本来打算开个香港卡，毕竟离咱不远，都要几十万村卡里面，目前囊中羞涩啊。<br />
+现在淘宝还能申请到EIN？我搜索了一下没几个，都是直接注册美国公司的。</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-58" class="comment_li">
+    <div id="comment-58">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2018年7月19日 上午12:11</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=58#respond' onclick='return addComment.moveForm( "comment-58", "58", "respond", "54" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>EIN目前可以申请到但是没有用了</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-196" class="comment_li">
+    <div id="comment-196">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/059ce0935bc4c2e52cefa78091190c59?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/059ce0935bc4c2e52cefa78091190c59?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">JUNO</p>
+                <p class="comment_time">2018年10月23日 下午3:44</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=196#respond' onclick='return addComment.moveForm( "comment-196", "196", "respond", "54" )' aria-label='回复给JUNO'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>EIN没有用了,是申请stripe帐号不需要了,还是要求必须SSN呀<br />
+那还能申请美国的stripe来收款吗</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-37" class="comment_li">
+    <div id="comment-37">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/a06eb09b50e44e2923d9da02ebdc567c?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/a06eb09b50e44e2923d9da02ebdc567c?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">BK</p>
+                <p class="comment_time">2018年6月22日 上午9:45</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=37#respond' onclick='return addComment.moveForm( "comment-37", "37", "respond", "54" )' aria-label='回复给BK'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>请问Shopify网站收款方式里面paypal和stripe用不同人名的身份来收款可以吗？</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-59" class="comment_li">
+    <div id="comment-59">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2018年7月19日 上午12:12</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=59#respond' onclick='return addComment.moveForm( "comment-59", "59", "respond", "54" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>可以</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-42" class="comment_li">
+    <div id="comment-42">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/b36ffca4434df991400e66641c866a07?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/b36ffca4434df991400e66641c866a07?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">wency</p>
+                <p class="comment_time">2018年7月7日 下午5:52</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=42#respond' onclick='return addComment.moveForm( "comment-42", "42", "respond", "54" )' aria-label='回复给wency'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>想问下注册payoneer的时候是直接用真实身份，注册地也是填真实中国地址？另外，我试过注册HK的STRIPE,公司有公司信息，但是现在要HK身份证号码……</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-60" class="comment_li">
+    <div id="comment-60">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2018年7月19日 上午12:13</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=60#respond' onclick='return addComment.moveForm( "comment-60", "60", "respond", "54" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>p卡是用真实身份，地址选中国。香港注册stripe如果有公司建议直接跟客服沟通</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-74" class="comment_li">
+    <div id="comment-74">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/71fb6ec1df0bbdbadd97e3fc39859e83?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/71fb6ec1df0bbdbadd97e3fc39859e83?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Jacky New</p>
+                <p class="comment_time">2018年7月26日 下午12:07</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=74#respond' onclick='return addComment.moveForm( "comment-74", "74", "respond", "54" )' aria-label='回复给Jacky New'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>Hello Alex,办P卡实体卡需要有40美金收款，但是stripe收款却不计在其中，请问这个该怎么解决呢</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-290" class="comment_li">
+    <div id="comment-290">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2019年1月5日 下午4:07</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=290#respond' onclick='return addComment.moveForm( "comment-290", "290", "respond", "54" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>淘宝可以找人转账</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-306" class="comment_li">
+    <div id="comment-306">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/8168d6be6bcbfd80a269909010fee50e?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/8168d6be6bcbfd80a269909010fee50e?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">鄂A-胡跑跑</p>
+                <p class="comment_time">2019年1月9日 上午1:21</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=306#respond' onclick='return addComment.moveForm( "comment-306", "306", "respond", "54" )' aria-label='回复给鄂A-胡跑跑'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>淘宝问过了，P卡互转的不算在40美金收款，几个淘宝卖家都说办不了这个申请实体卡的。新手都卡在这，头疼</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-82" class="comment_li">
+    <div id="comment-82">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/1c99aff0452797797fcf4e8cd2561460?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/1c99aff0452797797fcf4e8cd2561460?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">afei</p>
+                <p class="comment_time">2018年8月9日 上午2:56</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=82#respond' onclick='return addComment.moveForm( "comment-82", "82", "respond", "54" )' aria-label='回复给afei'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>验证护照是如何验证呢。是需要上传护照照片吗？<br />
+另外stripe会登陆你的网站看吗？所以必须是英文网站么？如果网站需要登录 必须给账号密码吗</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-291" class="comment_li">
+    <div id="comment-291">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2019年1月5日 下午4:09</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=291#respond' onclick='return addComment.moveForm( "comment-291", "291", "respond", "54" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>验证护照在申请之后会发邮件要求验证，点进去即可。<br />
+stripe不会要账号密码，至于网站内容是否能通过是玄学。</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-87" class="comment_li">
+    <div id="comment-87">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/71f14d9609b075ba1f8909d294a244e5?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/71f14d9609b075ba1f8909d294a244e5?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Mena</p>
+                <p class="comment_time">2018年8月17日 下午4:44</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=87#respond' onclick='return addComment.moveForm( "comment-87", "87", "respond", "54" )' aria-label='回复给Mena'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>你们香港的卡，用的是哪种？是不是信用卡啊？储蓄卡好像不行。</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-292" class="comment_li">
+    <div id="comment-292">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2019年1月5日 下午4:09</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=292#respond' onclick='return addComment.moveForm( "comment-292", "292", "respond", "54" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>储蓄卡可以的，我办的香港汇丰</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-90" class="comment_li">
+    <div id="comment-90">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/4a23ef5e47c92a942463d93f1d1b2878?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/4a23ef5e47c92a942463d93f1d1b2878?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Vic</p>
+                <p class="comment_time">2018年8月20日 下午4:12</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=90#respond' onclick='return addComment.moveForm( "comment-90", "90", "respond", "54" )' aria-label='回复给Vic'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>Alex大叔好，目前香港卡的方法还可行，打算用香港卡操作</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-293" class="comment_li">
+    <div id="comment-293">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2019年1月5日 下午4:10</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=293#respond' onclick='return addComment.moveForm( "comment-293", "293", "respond", "54" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>香港卡目前可行而且是最稳妥的</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-96" class="comment_li">
+    <div id="comment-96">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/7c4222a5fe4d9a4a6fef0518d4133dc7?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/7c4222a5fe4d9a4a6fef0518d4133dc7?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">A橘子</p>
+                <p class="comment_time">2018年8月24日 下午2:28</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=96#respond' onclick='return addComment.moveForm( "comment-96", "96", "respond", "54" )' aria-label='回复给A橘子'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>直接在SHOPIFY后台支付那边选择Stripe 然后点击Activate 之后，跳出的页面里填好资料然后点击授权之后就会绑定成功了吗？还是说需要做别的事呢？我选择的是香港地区的，我们老板在香港那边倒是都有账户和地址之类的填写应该没问题，我现在在等他提供信息，就是不知道填完按了authorization之后还需不需要做什么？</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-294" class="comment_li">
+    <div id="comment-294">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2019年1月5日 下午4:10</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=294#respond' onclick='return addComment.moveForm( "comment-294", "294", "respond", "54" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>shopify后台验证完stipe就可以了，不需要自己调用接口，shopify内已经集成了</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-167" class="comment_li">
+    <div id="comment-167">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/71fb6ec1df0bbdbadd97e3fc39859e83?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/71fb6ec1df0bbdbadd97e3fc39859e83?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Jacky</p>
+                <p class="comment_time">2018年9月23日 下午8:54</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=167#respond' onclick='return addComment.moveForm( "comment-167", "167", "respond", "54" )' aria-label='回复给Jacky'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>Alex, stripe现在要求提供ID或者SSN验证账号拥有者身份了，方法一目前风险极大。不知道你现在用的什么方式收款，我感觉自己要被釜底抽薪了</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-295" class="comment_li">
+    <div id="comment-295">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2019年1月5日 下午4:11</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=295#respond' onclick='return addComment.moveForm( "comment-295", "295", "respond", "54" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>美国区申请确实已经不行了，最稳妥是香港卡申请。如果申请不下来香港卡可以花钱代买欧洲区账号，成功率100%，需要的话留言</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-384" class="comment_li">
+    <div id="comment-384">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/4929fb493778753acd049a2298dc637a?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/4929fb493778753acd049a2298dc637a?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">鱼鱼鱼</p>
+                <p class="comment_time">2019年2月14日 上午10:40</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=384#respond' onclick='return addComment.moveForm( "comment-384", "384", "respond", "54" )' aria-label='回复给鱼鱼鱼'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>欧洲区账号有风险吗？ 我的小网站还没弄好，到时可能需要一个。</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-184" class="comment_li">
+    <div id="comment-184">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/ae0024427b0db3b1c9e8058b5f1a4fde?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/ae0024427b0db3b1c9e8058b5f1a4fde?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Randal</p>
+                <p class="comment_time">2018年10月11日 下午2:37</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=184#respond' onclick='return addComment.moveForm( "comment-184", "184", "respond", "54" )' aria-label='回复给Randal'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>Alex，请教一下，一个stripe能收两个shopify账号的款吗？还有就是，我打算用美国公司身份注册stripe，但银行账号用私人的p卡这样有没有问题？据说登陆stripe账号会检查ip，不然会被封号，这个会吗？谢谢指教。</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-296" class="comment_li">
+    <div id="comment-296">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2019年1月5日 下午4:13</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=296#respond' onclick='return addComment.moveForm( "comment-296", "296", "respond", "54" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>可以收不同shopify账号的款。现在P卡在美国区的虚拟卡受管制较严格，不建议美国区使用P卡。欧洲区的可以</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-301" class="comment_li">
+    <div id="comment-301">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/704bc0099b65837330c5f8e27a9ba22f?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/704bc0099b65837330c5f8e27a9ba22f?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">vivian</p>
+                <p class="comment_time">2019年1月8日 下午2:44</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=301#respond' onclick='return addComment.moveForm( "comment-301", "301", "respond", "54" )' aria-label='回复给vivian'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>欧洲卡代办可以收美金吗？申请香港的stripe，个人香港银行账户没有香港身份证就可以申请吗？还是需要香港公司和身份证？</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-302" class="comment_li">
+    <div id="comment-302">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2019年1月8日 下午3:08</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=302#respond' onclick='return addComment.moveForm( "comment-302", "302", "respond", "54" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>可以收美金。个人可以用大陆身份申请香港银行卡。</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-305" class="comment_li">
+    <div id="comment-305">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/65d5bc9b37451f2b9f2f3a69476a65b6?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/65d5bc9b37451f2b9f2f3a69476a65b6?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">fate</p>
+                <p class="comment_time">2019年1月8日 下午8:49</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=305#respond' onclick='return addComment.moveForm( "comment-305", "305", "respond", "54" )' aria-label='回复给fate'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>香港个人银行储蓄卡是要存几十万在里面才安全吗？</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-307" class="comment_li">
+    <div id="comment-307">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2019年1月9日 上午10:39</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=307#respond' onclick='return addComment.moveForm( "comment-307", "307", "respond", "54" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>安全是没有问题的，只是不放几十万的话，每月会收一百多港币手续费，手续费都不够的话，会撤销账户</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-329" class="comment_li">
+    <div id="comment-329">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/5285d0fbd403a86c250aa196534db172?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/5285d0fbd403a86c250aa196534db172?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">chris</p>
+                <p class="comment_time">2019年1月15日 下午4:25</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=329#respond' onclick='return addComment.moveForm( "comment-329", "329", "respond", "54" )' aria-label='回复给chris'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>Alex你好，shopify的payment provider里面找了半天也没有找到stripe，是不是shopify现在不支持这个信用卡收款渠道了？求解答</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-330" class="comment_li">
+    <div id="comment-330">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2019年1月15日 下午4:27</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=330#respond' onclick='return addComment.moveForm( "comment-330", "330", "respond", "54" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>有stripe啊，你说完我去看了一眼还有</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-332" class="comment_li">
+    <div id="comment-332">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/5285d0fbd403a86c250aa196534db172?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/5285d0fbd403a86c250aa196534db172?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">chris</p>
+                <p class="comment_time">2019年1月15日 下午5:04</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=332#respond' onclick='return addComment.moveForm( "comment-332", "332", "respond", "54" )' aria-label='回复给chris'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>我刚刚问了客服，客服说，店铺地址写中国 或者美国 都用不了stripe，Alex，求解决办法！</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-396" class="comment_li">
+    <div id="comment-396">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/a4fb78ff16e70243d46816898f5297d4?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/a4fb78ff16e70243d46816898f5297d4?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Marlin</p>
+                <p class="comment_time">2019年2月19日 下午4:34</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=396#respond' onclick='return addComment.moveForm( "comment-396", "396", "respond", "54" )' aria-label='回复给Marlin'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>Chris你好，我也没有找到stripe，请问你现在找到了么？</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-331" class="comment_li">
+    <div id="comment-331">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/5285d0fbd403a86c250aa196534db172?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/5285d0fbd403a86c250aa196534db172?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">chris</p>
+                <p class="comment_time">2019年1月15日 下午4:35</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=331#respond' onclick='return addComment.moveForm( "comment-331", "331", "respond", "54" )' aria-label='回复给chris'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>不会吧，我找了好多遍都没找到。。。</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-334" class="comment_li">
+    <div id="comment-334">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/032552518b04152e13de04be4c115ed9?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/032552518b04152e13de04be4c115ed9?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">NICK</p>
+                <p class="comment_time">2019年1月16日 下午8:11</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=334#respond' onclick='return addComment.moveForm( "comment-334", "334", "respond", "54" )' aria-label='回复给NICK'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>请问STRIPE如果收仿牌会被冻结吗</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-335" class="comment_li">
+    <div id="comment-335">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2019年1月16日 下午8:15</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=335#respond' onclick='return addComment.moveForm( "comment-335", "335", "respond", "54" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>必然会</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-338" class="comment_li">
+    <div id="comment-338">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/fbfa2807ca6d3ac264e2562427a08a4b?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/fbfa2807ca6d3ac264e2562427a08a4b?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">james</p>
+                <p class="comment_time">2019年1月18日 上午11:39</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=338#respond' onclick='return addComment.moveForm( "comment-338", "338", "respond", "54" )' aria-label='回复给james'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>香港的费率好像比美国的要高不少</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-339" class="comment_li">
+    <div id="comment-339">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2019年1月18日 下午12:19</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=339#respond' onclick='return addComment.moveForm( "comment-339", "339", "respond", "54" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>香港费率是比美国高一些：3.4%+2.35港币<br />
+美国是：2.9%+0.3美元<br />
+欧洲区最便宜：1.4%+0.25欧元</p>
+<p>不过收美金的话，香港区和欧洲区入账时都会自动转换成港币和欧元，损失一些汇率大约1%</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-357" class="comment_li">
+    <div id="comment-357">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/fbfa2807ca6d3ac264e2562427a08a4b?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/fbfa2807ca6d3ac264e2562427a08a4b?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">james</p>
+                <p class="comment_time">2019年1月26日 下午6:30</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=357#respond' onclick='return addComment.moveForm( "comment-357", "357", "respond", "54" )' aria-label='回复给james'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>能给一下联系方式吗？</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-341" class="comment_li">
+    <div id="comment-341">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/01c865f501c16b3518b92beb6183d971?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/01c865f501c16b3518b92beb6183d971?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Eric</p>
+                <p class="comment_time">2019年1月22日 上午11:31</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=341#respond' onclick='return addComment.moveForm( "comment-341", "341", "respond", "54" )' aria-label='回复给Eric'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>你好 Alex.<br />
+请问办理stripe的P卡是需要实体卡还是有账号就可以呢？我的P卡没有办理实体卡可以吗？当时开通了欧元，英镑，美元等6个货币</p>
+<p>现在我的网站建设好了，当时流量一直起不来。我应该从哪里入手增加流量呢？</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-342" class="comment_li">
+    <div id="comment-342">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2019年1月22日 上午11:35</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=342#respond' onclick='return addComment.moveForm( "comment-342", "342", "respond", "54" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>办理stripe不需要实体卡就可以<br />
+独立站流量需要购买，从google/facebook或其他平台</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-376" class="comment_li">
+    <div id="comment-376">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/dc233f1b98a2cbf632ee12798f464e4f?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/dc233f1b98a2cbf632ee12798f464e4f?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">vtime</p>
+                <p class="comment_time">2019年2月7日 下午8:31</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=376#respond' onclick='return addComment.moveForm( "comment-376", "376", "respond", "54" )' aria-label='回复给vtime'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>你好，alex，请问如果办理了stripe（基于香港银行卡），那么shopify + stripe 的收款进入了香港账号（应该是美金或者港币），而我们在国内下单（1688 或者 aliexpress）基本上用的是国内银行的资金（人民币），这个资金周转问题，可能涉及到结汇？有什么好的合法处理方法吗？麻烦你简单介绍下。</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-519" class="comment_li">
+    <div id="comment-519">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/fac5bfc11f38abfcc4b5eaccd4430464?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/fac5bfc11f38abfcc4b5eaccd4430464?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">benltey</p>
+                <p class="comment_time">2019年4月1日 上午10:29</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=519#respond' onclick='return addComment.moveForm( "comment-519", "519", "respond", "54" )' aria-label='回复给benltey'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>这个好办，我目前的解决方案是找香港代购兑换，我表弟本就是做港代的，每次我都是港币给他用，他人民币，他也省下很多不必要的汇率损失，毕竟都是找香港本地的换币店买港币，仅供参考，有其他更好的方案可以分享哈~</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-567" class="comment_li">
+    <div id="comment-567">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/8fea3d2107b0712b0ecf6e676f216e36?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/8fea3d2107b0712b0ecf6e676f216e36?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">托帝</p>
+                <p class="comment_time">2019年5月7日 上午9:18</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=567#respond' onclick='return addComment.moveForm( "comment-567", "567", "respond", "54" )' aria-label='回复给托帝'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>你好，我们是做stripe收款结汇的。结汇没有限额</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-377" class="comment_li">
+    <div id="comment-377">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/0fbf51652ee89685c2a5ce834f43f361?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/0fbf51652ee89685c2a5ce834f43f361?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Jesen</p>
+                <p class="comment_time">2019年2月8日 下午4:59</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=377#respond' onclick='return addComment.moveForm( "comment-377", "377", "respond", "54" )' aria-label='回复给Jesen'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>你好！需要欧洲stripe 开户的联系方式</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-378" class="comment_li">
+    <div id="comment-378">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/676b6fc9c06ce7d68243d8b3a46160d7?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/676b6fc9c06ce7d68243d8b3a46160d7?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Allen</p>
+                <p class="comment_time">2019年2月9日 下午6:48</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=378#respond' onclick='return addComment.moveForm( "comment-378", "378", "respond", "54" )' aria-label='回复给Allen'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>你好Alex，我们想注册欧洲的stripe,请问怎么联系，谢谢</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-381" class="comment_li">
+    <div id="comment-381">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/e8e5211993d93c6cd705071190801904?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/e8e5211993d93c6cd705071190801904?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">明</p>
+                <p class="comment_time">2019年2月12日 下午9:25</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=381#respond' onclick='return addComment.moveForm( "comment-381", "381", "respond", "54" )' aria-label='回复给明'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>大叔，我需要你的帮助。，我需要代办。。。。，</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-385" class="comment_li">
+    <div id="comment-385">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/4929fb493778753acd049a2298dc637a?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/4929fb493778753acd049a2298dc637a?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">鱼鱼鱼鱼</p>
+                <p class="comment_time">2019年2月14日 上午10:43</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=385#respond' onclick='return addComment.moveForm( "comment-385", "385", "respond", "54" )' aria-label='回复给鱼鱼鱼鱼'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>Strpe对Payoneer是直接不支持的吧，我刚刚问了strpie客户，他们说不支持Payoneer卡，只支持实地卡。</p>
+<p>我想了解一下欧洲区的方法，我在弄个小网站，到时想尽量用上strpie，方便的时候发邮件或加我qq聊一下？</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-386" class="comment_li">
+    <div id="comment-386">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/ef7000ddf5a090514db7cbcac2cbd038?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/ef7000ddf5a090514db7cbcac2cbd038?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Magi</p>
+                <p class="comment_time">2019年2月15日 上午12:13</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=386#respond' onclick='return addComment.moveForm( "comment-386", "386", "respond", "54" )' aria-label='回复给Magi'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>Stripe欧洲区代办要怎么联系</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-390" class="comment_li">
+    <div id="comment-390">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/c5b2548c7b4288b536bb5bab1ccc39c5?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/c5b2548c7b4288b536bb5bab1ccc39c5?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">jack</p>
+                <p class="comment_time">2019年2月17日 下午3:50</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=390#respond' onclick='return addComment.moveForm( "comment-390", "390", "respond", "54" )' aria-label='回复给jack'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>您好，求一个代办联系方式</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-406" class="comment_li">
+    <div id="comment-406">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/a927781ee8ca23ddf815955be2816c0b?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/a927781ee8ca23ddf815955be2816c0b?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">spring</p>
+                <p class="comment_time">2019年2月22日 下午5:42</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=406#respond' onclick='return addComment.moveForm( "comment-406", "406", "respond", "54" )' aria-label='回复给spring'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>用香港卡收款，请问是用美元子账号，还是港币子账号</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-407" class="comment_li">
+    <div id="comment-407">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2019年2月22日 下午6:05</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=407#respond' onclick='return addComment.moveForm( "comment-407", "407", "respond", "54" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>港币</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-422" class="comment_li">
+    <div id="comment-422">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/dc233f1b98a2cbf632ee12798f464e4f?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/dc233f1b98a2cbf632ee12798f464e4f?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">vtime</p>
+                <p class="comment_time">2019年3月1日 上午2:03</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=422#respond' onclick='return addComment.moveForm( "comment-422", "422", "respond", "54" )' aria-label='回复给vtime'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>你好，我使用香港招商银行的个人卡，已经开通了Stripe（香港账号），并且已经关联到Shopify店铺。我的问题是：当用户使用信用卡进行支付，款项最终会转账到香港招商银行（港币），如何操作才能提现到国内人民币账户？采用Payoneer可以吗？可以突破5W美金的结汇限制吗？谢谢Alex。</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-565" class="comment_li">
+    <div id="comment-565">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/8fea3d2107b0712b0ecf6e676f216e36?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/8fea3d2107b0712b0ecf6e676f216e36?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">托帝</p>
+                <p class="comment_time">2019年5月6日 下午5:44</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=565#respond' onclick='return addComment.moveForm( "comment-565", "565", "respond", "54" )' aria-label='回复给托帝'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>你好，我们是做stripe收款结汇的。结汇没有限额</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-487" class="comment_li">
+    <div id="comment-487">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/2df72c8b69f8f67a7569e3454e2fd4f2?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/2df72c8b69f8f67a7569e3454e2fd4f2?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Albert</p>
+                <p class="comment_time">2019年3月22日 上午10:52</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=487#respond' onclick='return addComment.moveForm( "comment-487", "487", "respond", "54" )' aria-label='回复给Albert'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>我想要stripe代办的联系方式，谢谢。</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-510" class="comment_li">
+    <div id="comment-510">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/05e80537659b822e589e6b3c1c7fa028?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/05e80537659b822e589e6b3c1c7fa028?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Jason</p>
+                <p class="comment_time">2019年3月29日 下午3:45</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=510#respond' onclick='return addComment.moveForm( "comment-510", "510", "respond", "54" )' aria-label='回复给Jason'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>我想要stripe代办的联系方式，谢谢</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-513" class="comment_li">
+    <div id="comment-513">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2019年3月29日 下午4:05</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=513#respond' onclick='return addComment.moveForm( "comment-513", "513", "respond", "54" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>兄弟，好好看看文章，我已经发出来了</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-511" class="comment_li">
+    <div id="comment-511">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/fac5bfc11f38abfcc4b5eaccd4430464?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/fac5bfc11f38abfcc4b5eaccd4430464?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">bentley</p>
+                <p class="comment_time">2019年3月29日 下午3:59</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=511#respond' onclick='return addComment.moveForm( "comment-511", "511", "respond", "54" )' aria-label='回复给bentley'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>Alex大叔，你好，我现在已经办理了一张工银亚洲成功激活了香港区的stripe，但是貌似香港区的stripe跟美国区的还有欧洲区的都不同啊，只能收Visa，Master Card跟American Express，功能感觉有点被阉割了，有必要区激活欧洲区或者美国区的stripe吗，还有就是，香港工银亚洲综合账户下有好几个子账户，港元往来，港元储蓄，美元往来，外币储蓄&#8230;应该填哪一个在stripe里，谢谢啦，不胜感激！</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-512" class="comment_li">
+    <div id="comment-512">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2019年3月29日 下午4:05</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=512#respond' onclick='return addComment.moveForm( "comment-512", "512", "respond", "54" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>Visa MasterCard American Express还不够么兄弟。。美国这仨占领了市场95%<br />
+工银亚洲不清楚，不过应该逻辑差不多，港币是主账户，其他币种相当于子账户，填港币的就行。Stripe香港区只会打港币进来</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-518" class="comment_li">
+    <div id="comment-518">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/fac5bfc11f38abfcc4b5eaccd4430464?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/fac5bfc11f38abfcc4b5eaccd4430464?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">bentley</p>
+                <p class="comment_time">2019年4月1日 上午10:25</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=518#respond' onclick='return addComment.moveForm( "comment-518", "518", "respond", "54" )' aria-label='回复给bentley'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>哈哈哈，手动哭笑不得，我主要做欧洲市场比较多，德国，奥地利，法国，荷兰，比利时等欧洲国家，然后欧版跟美版stripe都有很好的解决了这些国家的本地支付，就是港版的没有呀</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-535" class="comment_li">
+    <div id="comment-535">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/dfcfda0948f3401c6a200ce969eda701?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/dfcfda0948f3401c6a200ce969eda701?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">vincenzo</p>
+                <p class="comment_time">2019年4月8日 下午2:31</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=535#respond' onclick='return addComment.moveForm( "comment-535", "535", "respond", "54" )' aria-label='回复给vincenzo'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>大叔你好,<br />
+请问以下3个问题：<br />
+1. 香港银行账户申请Stripe除了country那栏选香港，下面还有个Home address一定要填香港地址吗？没有香港地址能填大陆地址吗？<br />
+2. 香港银行账户/欧洲银行账户，大叔建议用哪个申请Stripe更好？<br />
+3. 如果用欧洲银行账户，怎样短信验证呢？有类似那个香港的易博通吗？国内手机号能验证吗？<br />
+谢谢！</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-537" class="comment_li">
+    <div id="comment-537">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/2dbb50ffa9b66a40dbaa969c08fcf193?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/2dbb50ffa9b66a40dbaa969c08fcf193?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">宏亮</p>
+                <p class="comment_time">2019年4月9日 上午9:37</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=537#respond' onclick='return addComment.moveForm( "comment-537", "537", "respond", "54" )' aria-label='回复给宏亮'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>你好楼主，我的公司注册地是香港，在shopify后台填写香港地址就找不到stripe收款选项，而我把地址修改为大陆地址就可以找到stripe收款选项，这是为什么呢？找遍了网络也没用解决办法/</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-552" class="comment_li">
+    <div id="comment-552">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/930a947581d842c59706e4137e7bcd02?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/930a947581d842c59706e4137e7bcd02?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Erica</p>
+                <p class="comment_time">2019年4月25日 下午2:56</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=552#respond' onclick='return addComment.moveForm( "comment-552", "552", "respond", "54" )' aria-label='回复给Erica'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>你好，</p>
+<p>欧洲账号收款几单后，就会要求验证地址。<br />
+没有当地的地址证明。这怎么破？</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-564" class="comment_li">
+    <div id="comment-564">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/8fea3d2107b0712b0ecf6e676f216e36?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/8fea3d2107b0712b0ecf6e676f216e36?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">托帝</p>
+                <p class="comment_time">2019年5月6日 下午2:32</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=564#respond' onclick='return addComment.moveForm( "comment-564", "564", "respond", "54" )' aria-label='回复给托帝'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>Hello，我们是第三方收款结汇的公司。这篇笔记写的真的不错，不是很明白的人也都看懂了。我想我们刚好很契合stripe的注册开户要求。因为我们的银行账户体系中有一个点就是在香港，也就意味着能够解决很多人开不了香港的银行账户的尴尬。而且，也不需要本人自己跑去香港，省去了很多的麻烦和不便！</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-571" class="comment_li">
+    <div id="comment-571">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/b97539c6345aa5d4140bd51c91ff8fb2?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/b97539c6345aa5d4140bd51c91ff8fb2?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">大卫云龙哥</p>
+                <p class="comment_time">2019年5月13日 下午6:04</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=571#respond' onclick='return addComment.moveForm( "comment-571", "571", "respond", "54" )' aria-label='回复给大卫云龙哥'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>你好 你的联系方式是什么，我现在stripe香港银行卡的钱不能转到国内</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-576" class="comment_li">
+    <div id="comment-576">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/8fea3d2107b0712b0ecf6e676f216e36?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/8fea3d2107b0712b0ecf6e676f216e36?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">托帝</p>
+                <p class="comment_time">2019年5月15日 下午2:47</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=576#respond' onclick='return addComment.moveForm( "comment-576", "576", "respond", "54" )' aria-label='回复给托帝'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>你好，可以加我QQ1104169700</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-575" class="comment_li">
+    <div id="comment-575">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/14db3570e16f68a18f88fed28aaf6b36?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/14db3570e16f68a18f88fed28aaf6b36?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">weidu</p>
+                <p class="comment_time">2019年5月15日 上午4:25</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=575#respond' onclick='return addComment.moveForm( "comment-575", "575", "respond", "54" )' aria-label='回复给weidu'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>我现在在乌克兰，但是马上要回国了，我如果办下来，回国之后，会不会因为ip地址的改变被封号啊？</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-591" class="comment_li">
+    <div id="comment-591">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/bc6c260590c580d45c388d3a3ace411b?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/bc6c260590c580d45c388d3a3ace411b?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">小龙虾的肉</p>
+                <p class="comment_time">2019年6月2日 下午3:13</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=591#respond' onclick='return addComment.moveForm( "comment-591", "591", "respond", "54" )' aria-label='回复给小龙虾的肉'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>老铁，你好。<br />
+请问下个DROPSHIPPING 在速卖通上面付款的时候，因为不支持国内的信用卡，那怎么解决这个付款的问题呢？恳请大佬有空回复。。谢谢！</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-602" class="comment_li">
+    <div id="comment-602">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/e625367c55f42159b89657c69ce2567c?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/e625367c55f42159b89657c69ce2567c?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">mozi</p>
+                <p class="comment_time">2019年6月19日 下午6:11</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=602#respond' onclick='return addComment.moveForm( "comment-602", "602", "respond", "54" )' aria-label='回复给mozi'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>办visa卡</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-605" class="comment_li">
+    <div id="comment-605">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/2ba3e5ed16e642b79b5b00064016ef8e?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/2ba3e5ed16e642b79b5b00064016ef8e?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Hannah</p>
+                <p class="comment_time">2019年6月20日 下午5:38</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=605#respond' onclick='return addComment.moveForm( "comment-605", "605", "respond", "54" )' aria-label='回复给Hannah'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>Hi Alex,我在一个美国公司做彩妆的品牌推广,看了你关于数字营销方面的分享非常受益,想和你有进一步的沟通与合作</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-704" class="comment_li">
+    <div id="comment-704">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/5326d4a77af1bdd95efe93ff0a59820e?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/5326d4a77af1bdd95efe93ff0a59820e?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Sarah</p>
+                <p class="comment_time">2019年8月28日 下午11:28</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=704#respond' onclick='return addComment.moveForm( "comment-704", "704", "respond", "54" )' aria-label='回复给Sarah'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>Hi Alex, 我在美国有SSN和银行帐户，如果我将Stripe选择美国，留下我美国朋友的地址和电话（但是是我的SSN和银行帐户）这样的话会不会被认定我在美国需要缴美国的sales tax呢？谢谢</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-775" class="comment_li">
+    <div id="comment-775">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/1254f27fa03b439e6846212366b8ca97?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/1254f27fa03b439e6846212366b8ca97?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">levi</p>
+                <p class="comment_time">2019年10月19日 上午11:06</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=775#respond' onclick='return addComment.moveForm( "comment-775", "775", "respond", "54" )' aria-label='回复给levi'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>找shopify客服 让他们开通 stripe被删了 因为shopify推自己的支付   用的其实是stripe,</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-834" class="comment_li">
+    <div id="comment-834">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/7277a884fb71b366f9b2fbc4336d4e5e?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/7277a884fb71b366f9b2fbc4336d4e5e?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">棕色大熊猫</p>
+                <p class="comment_time">2020年1月2日 下午9:40</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=834#respond' onclick='return addComment.moveForm( "comment-834", "834", "respond", "54" )' aria-label='回复给棕色大熊猫'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>是直接找客服就能开通stripe吗？</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-835" class="comment_li">
+    <div id="comment-835">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/ec2737890b6e809f04805a89e3edae25?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/ec2737890b6e809f04805a89e3edae25?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">火猴</p>
+                <p class="comment_time">2020年1月3日 上午9:08</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=835#respond' onclick='return addComment.moveForm( "comment-835", "835", "respond", "54" )' aria-label='回复给火猴'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>最近才上shopify, 找了好久没有找到stripe, 原来是要找办法让客服开通呀。</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-855" class="comment_li">
+    <div id="comment-855">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/f36412e8c094204837c47b7a250d4510?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/f36412e8c094204837c47b7a250d4510?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">hart</p>
+                <p class="comment_time">2020年3月9日 下午8:13</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify54.html?replytocom=855#respond' onclick='return addComment.moveForm( "comment-855", "855", "respond", "54" )' aria-label='回复给hart'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>你好，alex，我现在开通了香港账户，但是还是激活不了，他告诉我网站资质不够，很惆怅，我想咨询一下你，香港账户账户激活的详细过程</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ul>
+	<div id="respond" class="comment-respond">
+		<h4 id="reply-title" class="comment-reply-title">发表评论 <small><a rel="nofollow" id="cancel-comment-reply-link" href="/shopify54.html?User-Agent=Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%3B+rv%3A65.0%29+Gecko%2F20100101+Firefox%2F65.0#respond" style="display:none;">取消回复</a></small></h4>			<form action="https://www.shopifynotes.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+				<p class="comment-notes"><span id="email-notes">电子邮件地址不会被公开。</span> 必填项已用<span class="required">*</span>标注</p><div class="comment form-group has-feedback"><textarea class="form-control" id="comment" placeholder=" " name="comment" rows="5" aria-required="true" required  onkeydown="if(event.ctrlKey){if(event.keyCode==13){document.getElementById('submit').click();return false}};"></textarea></div><div class="comment-form-author form-group has-feedback"><div class="input-group"><div class="input-group-addon"><i class="fa fa-user"></i></div><input class="form-control" placeholder="昵称" id="author" name="author" type="text" value="" " size="30" /><span class="form-control-feedback required">*</span></div></div>
+<div class="comment-form-email form-group has-feedback"><div class="input-group"><div class="input-group-addon"><i class="fa fa-envelope-o"></i></div><input class="form-control" placeholder="邮箱" id="email" name="email" type="text" value="" " size="30" /><span class="form-control-feedback required">*</span></div></div>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="btn btn-primary" value="发表评论" /> <input type='hidden' name='comment_post_ID' value='54' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="98f30ad1c1" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="12"/></p>			</form>
+			</div><!-- #respond -->
+	        </section>
+    </article>
+    <section class="col-md-8 col-md-offset-2 clearfix">
+    <div class="read">
+        <div class="read-head"> <i class="fa fa-book"></i> 更多阅读 </div>
+        <div class="read-list row">
+            <div class="col-md-6">
+                <ul>
+                                    </ul>
+            </div>
+            <div class="col-md-6">
+                <ul>
+                                    <li><a href="https://www.shopifynotes.com/shopify57.html" title="Shopify在Facebook测产品到底用Website conversion(WC)还是Post engagement(PPE)">Shopify在Facebook测产品到底用Website conversion(WC)还是Post engagement(PPE)</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify50.html" title="shopify独立站开店必看教程 &#8211; 这些坑你不用再趟一遍">shopify独立站开店必看教程 &#8211; 这些坑你不用再趟一遍</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify45.html" title="如何自动屏蔽Facebook帖子差评？">如何自动屏蔽Facebook帖子差评？</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify1.html" title="从$0到$10000000 &#8211; shopify跨境电商笔记第一篇">从$0到$10000000 &#8211; shopify跨境电商笔记第一篇</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify121.html" title="Shopify终极教程+复盘：我是如何在6个月时间从0做到$100万">Shopify终极教程+复盘：我是如何在6个月时间从0做到$100万</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify87.html" title="shopify推广技巧之初级facebook再营销">shopify推广技巧之初级facebook再营销</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify54.html" title="shopify收款方式之 &#8211; 如何申请stripe（19年更新成功率100%）">shopify收款方式之 &#8211; 如何申请stripe（19年更新成功率100%）</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify72.html" title="为什么不建议shopify卖家使用goo.gl &#038; bit.ly等短链接">为什么不建议shopify卖家使用goo.gl &#038; bit.ly等短链接</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify93.html" title="2019年Facebook最强spy工具 &#8211; adspy">2019年Facebook最强spy工具 &#8211; adspy</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify106.html" title="Dropshipping怎么做？95%卖家都不知道可以如此简单">Dropshipping怎么做？95%卖家都不知道可以如此简单</a></li>
+                                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="read">
+        <div class="read-head"> <i class="fa fa-tags"></i> 标签云 </div>
+        <div class="read-list">
+            <a href="https://www.shopifynotes.com/shopifytag/dropshipping%e6%95%99%e7%a8%8b" class="tag-cloud-link tag-link-29 tag-link-position-1" style="font-size: 10.863636363636pt;" aria-label="dropshipping教程 (2个项目)">dropshipping教程</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook-spy%e5%b7%a5%e5%85%b7" class="tag-cloud-link tag-link-26 tag-link-position-2" style="font-size: 8pt;" aria-label="facebook spy工具 (1个项目)">facebook spy工具</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e5%86%8d%e8%90%a5%e9%94%80" class="tag-cloud-link tag-link-25 tag-link-position-3" style="font-size: 8pt;" aria-label="facebook再营销 (1个项目)">facebook再营销</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e5%b9%bf%e5%91%8a" class="tag-cloud-link tag-link-20 tag-link-position-4" style="font-size: 12.772727272727pt;" aria-label="facebook广告 (3个项目)">facebook广告</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e5%b9%bf%e5%91%8aspy" class="tag-cloud-link tag-link-27 tag-link-position-5" style="font-size: 8pt;" aria-label="facebook广告spy (1个项目)">facebook广告spy</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e5%b9%bf%e5%91%8a%e6%95%99%e7%a8%8b" class="tag-cloud-link tag-link-10 tag-link-position-6" style="font-size: 12.772727272727pt;" aria-label="facebook广告教程 (3个项目)">facebook广告教程</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e6%8e%a8%e5%b9%bf" class="tag-cloud-link tag-link-21 tag-link-position-7" style="font-size: 10.863636363636pt;" aria-label="facebook推广 (2个项目)">facebook推广</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e6%95%99%e7%a8%8b" class="tag-cloud-link tag-link-14 tag-link-position-8" style="font-size: 12.772727272727pt;" aria-label="facebook教程 (3个项目)">facebook教程</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e7%94%b5%e5%95%86%e5%b9%bf%e5%91%8a" class="tag-cloud-link tag-link-7 tag-link-position-9" style="font-size: 14.363636363636pt;" aria-label="facebook电商广告 (4个项目)">facebook电商广告</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e8%87%aa%e5%8a%a8%e5%88%a0%e5%b7%ae%e8%af%84" class="tag-cloud-link tag-link-15 tag-link-position-10" style="font-size: 8pt;" aria-label="facebook自动删差评 (1个项目)">facebook自动删差评</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify-app" class="tag-cloud-link tag-link-18 tag-link-position-11" style="font-size: 8pt;" aria-label="shopify app (1个项目)">shopify app</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify-dropshipping" class="tag-cloud-link tag-link-28 tag-link-position-12" style="font-size: 8pt;" aria-label="shopify dropshipping (1个项目)">shopify dropshipping</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e5%86%8d%e8%90%a5%e9%94%80" class="tag-cloud-link tag-link-24 tag-link-position-13" style="font-size: 8pt;" aria-label="shopify再营销 (1个项目)">shopify再营销</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e5%b9%bf%e5%91%8a" class="tag-cloud-link tag-link-8 tag-link-position-14" style="font-size: 14.363636363636pt;" aria-label="shopify广告 (4个项目)">shopify广告</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e5%bc%80%e5%ba%97" class="tag-cloud-link tag-link-5 tag-link-position-15" style="font-size: 15.636363636364pt;" aria-label="shopify开店 (5个项目)">shopify开店</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e5%bc%95%e6%b5%81" class="tag-cloud-link tag-link-9 tag-link-position-16" style="font-size: 10.863636363636pt;" aria-label="shopify引流 (2个项目)">shopify引流</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e6%8a%80%e5%b7%a7" class="tag-cloud-link tag-link-13 tag-link-position-17" style="font-size: 12.772727272727pt;" aria-label="shopify技巧 (3个项目)">shopify技巧</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e6%8e%a8%e5%b9%bf" class="tag-cloud-link tag-link-6 tag-link-position-18" style="font-size: 19.772727272727pt;" aria-label="shopify推广 (10个项目)">shopify推广</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e6%8f%92%e4%bb%b6" class="tag-cloud-link tag-link-19 tag-link-position-19" style="font-size: 8pt;" aria-label="shopify插件 (1个项目)">shopify插件</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e6%94%af%e4%bb%98" class="tag-cloud-link tag-link-17 tag-link-position-20" style="font-size: 12.772727272727pt;" aria-label="shopify支付 (3个项目)">shopify支付</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e6%94%b6%e6%ac%be" class="tag-cloud-link tag-link-16 tag-link-position-21" style="font-size: 12.772727272727pt;" aria-label="shopify收款 (3个项目)">shopify收款</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e6%95%99%e7%a8%8b" class="tag-cloud-link tag-link-4 tag-link-position-22" style="font-size: 22pt;" aria-label="shopify教程 (14个项目)">shopify教程</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e7%8b%ac%e7%ab%8b%e7%ab%99" class="tag-cloud-link tag-link-3 tag-link-position-23" style="font-size: 8pt;" aria-label="shopify独立站 (1个项目)">shopify独立站</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e7%ab%9e%e4%ba%89%e5%af%b9%e6%89%8b" class="tag-cloud-link tag-link-23 tag-link-position-24" style="font-size: 8pt;" aria-label="shopify竞争对手 (1个项目)">shopify竞争对手</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e7%ab%9e%e5%93%81%e5%88%86%e6%9e%90" class="tag-cloud-link tag-link-22 tag-link-position-25" style="font-size: 8pt;" aria-label="shopify竞品分析 (1个项目)">shopify竞品分析</a>        </div>
+    </div>
+    </section>
+</div>
+<!--modal-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content single-dashang">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-cny" aria-hidden="true"></i> 打赏支持</h4>
+            </div>
+            <div class="modal-body text-center">
+                <p><img border="0" src="https://tangjie.me/media/AliPay.png"><img border="0" src="https://www.shopifynotes.com/wp-content/uploads/2018/08/%E6%89%93%E8%B5%8F.png"></p>
+                <p>扫描二维码，输入您要打赏的金额</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--modal-->
+
+<div class="footer_search visible-xs visible-sm">
+    <form id="searchform" action="https://www.shopifynotes.com">
+        <div class="input-group">
+            <input type="search" class="form-control" placeholder="搜索…" value="" name="s">
+            <span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button></span>
+        </div>
+    </form>
+</div><!--
+<footer id="footer">
+    <div class="copyright">
+        <p><i class="fa fa-copyright" aria-hidden="true"></i> 2018 <b>产品经理@唐杰</b></p>
+        <p>Powered by <b>WordPress</b>.</p>
+    </div>
+    <div style="display:none;">代码在页面底部，统计标识不会显示，但不影响统计效果</div>
+</footer> -->
+<script type="text/javascript" src="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/js/skel.min.js"></script>
+<script type="text/javascript" src="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/js/util.min.js"></script>
+<script type="text/javascript" src="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/js/nav.js"></script>
+<script type='text/javascript' src='https://www.shopifynotes.com/wp-includes/js/comment-reply.min.js?ver=4.9.13'></script>
+<script async="async" type='text/javascript' src='https://www.shopifynotes.com/wp-content/plugins/akismet/_inc/form.js?ver=4.1.2'></script>
+<script>
+$(function() {
+    $('[data-toggle="tooltip"]').tooltip()
+});
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+</body>
+</html>

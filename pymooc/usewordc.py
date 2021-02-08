@@ -2,7 +2,7 @@ import jieba
 import matplotlib.pyplot as plt
 import wordcloud
 
-with open('../PYvs/tep1.txt','r',encoding='utf-8') as f:
+with open('../python_北京理工大学/tep1.txt','r',encoding='utf-8') as f:
     txt=f.read()
 c=jieba.lcut(txt)
 w=wordcloud.WordCloud(height=1000,width=700,background_color='white',

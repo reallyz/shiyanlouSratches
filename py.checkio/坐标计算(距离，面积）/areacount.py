@@ -33,7 +33,7 @@ def house(plan):
                 height += 1
 
     area = width * height
-    print(area)
+    print('this area print is in function %d'%area)
     return area
 
 
@@ -74,10 +74,10 @@ if __name__ == '__main__':
 0000
 #00#
 ''') == 12
-assert house('''
+    assert house('''
 0000
 0000
 #000
 ''') == 1
 
-print("Coding complete? Click 'Check' to earn cool rewards!")
+    print("Coding complete? Click 'Check' to earn cool rewards!")

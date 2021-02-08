@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>聊聊前段时间爆火的shopify60万店铺大数据分析</title>
+<meta name="description" content="前一段时间因为某人某个帖子兴起了一波采集shopify的风气，其操作手法是：因为shopify网站都是cname到shopify主站，所以有了批量采集的空间，把所有站url title description拿到以后，和alexa前一百万的网站匹配，提取交集以后再对整体title和description做分词，词频高于某个值的再筛掉，剩下的站再手动分析。" />
+<meta name="keywords" content="shopify广告,shopify教程" />
+<link rel="apple-touch-icon" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/images/icon_32.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/images/icon_152.png">
+<link rel="apple-touch-icon" sizes="167x167" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/images/icon_167.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/images/icon_180.png">
+<link rel="icon" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/images/icon_32.png" type="image/x-icon">
+<link rel="stylesheet" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/css/font-awesome.min.css">
+<script type="text/javascript" src="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/js/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/style.css">
+<link rel="pingback" href="https://www.shopifynotes.com/xmlrpc.php" />
+<meta name="dc.title" content="聊聊前段时间爆火的shopify60万店铺大数据分析 - Shopify跨境电商独立站笔记" />
+<meta name="dc.description" content="前一段时间因为某人某个帖子兴起了一波采集shopify的风气，其操作手法是：因为shopify网站都&hellip;" />
+<meta name="dc.relation" content="https://www.shopifynotes.com/shopify89.html/" />
+<meta name="dc.source" content="https://www.shopifynotes.com/" />
+<meta name="dc.language" content="zh_CN" />
+<meta name="description" content="前一段时间因为某人某个帖子兴起了一波采集shopify的风气，其操作手法是：因为shopify网站都&hellip;" />
+<link rel="canonical" href="https://www.shopifynotes.com/shopify89.html/" />
+
+<script async src='https://www.googletagmanager.com/gtag/js?id=UA-110013720-3'></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+jQuery(document).ready(function() {
+	jQuery('a[target="_blank"]').click(function(e) {
+		gtag('event', 'click', {'event_category': 'external links','event_label' : this.href});
+	});
+});
+gtag('config', 'UA-110013720-3' , {'allow_display_features': false,});
+
+</script>
+<style type="text/css">
+a{color:#393e46}
+a:hover{color:#00adb5!important}
+#header{background-color:#393e46}
+.widget .widget-title::after{background-color:#393e46}
+.uptop{border-left-color:#393e46}
+#titleBar .toggle:before{background:#393e46}
+</style>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110013720-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-110013720-3');
+</script>
+
+</head>
+
+<body>
+<header id="header">
+    <div class="avatar"><a href="https://www.shopifynotes.com" title="Shopify跨境电商独立站笔记"><img src="https://shopifynotes.com/wp-content/uploads/2018/04/shopify笔记.jpg" alt="Shopify跨境电商独立站笔记" class="img-circle" width="50%"></a></div>
+    <h1 id="name"><a href="https://www.shopifynotes.com" title="Shopify跨境电商独立站笔记" style="color:#fff">Alex是大叔</a></h1>
+    <div class="sns">
+                                            </div>
+    <div class="nav">
+        <ul><li><a href="https://shopifynotes.com/">首页</a></li>
+<li><a href="https://www.shopifynotes.com/shopifycategory/shopify-facebook-ads">Facebook广告教程</a></li>
+<li><a href="https://www.shopifynotes.com/shopifycategory/shopifynotes">Shopify操作笔记</a></li>
+<li><a href="https://www.shopifynotes.com/shopifycategory/shopify-tips">Shopify小技巧</a></li>
+</ul>    </div>
+    </header>
+
+<div id="main">
+    <article class="col-md-8 col-md-offset-2 view clearfix">
+        <h1 class="view-title">聊聊前段时间爆火的shopify60万店铺大数据分析</h1>
+        <div class="view-meta">
+            <span>作者: Alex是大叔</span>
+            <span>分类: <a href="https://www.shopifynotes.com/shopifycategory/shopifynotes" rel="category tag">Shopify独立站操作笔记</a></span>
+            <span>发布时间: 2018-11-15 11:47</span>
+            <span></span>
+        </div>
+        <div class="view-content">
+<p>前一段时间因为某人某个帖子兴起了一波采集shopify的风气，其操作手法是：因为shopify网站都是cname到shopify主站，所以有了批量采集的空间，把所有站url title description拿到以后，和alexa前一百万的网站匹配，提取交集以后再对整体title和description做分词，词频高于某个值的再筛掉，剩下的站再手动分析。</p>
+<p>一时间几乎所有人都在采集数据或者找人买数据，把这个数据当做圣杯一样，仿佛拿到了就可以飞黄腾达，一步登天。。</p>
+<p>我也顺手采集了一份，总网站有60多万，其中有效网站有40多万，排名世界前100万的有6000多个，分词词频TOP 20 如下：</p>
+<blockquote><p>clothing<br />
+jewelry<br />
+fashion<br />
+apparel<br />
+shirts<br />
+art<br />
+handmade<br />
+baby<br />
+hair<br />
+wear<br />
+bags<br />
+lifestyle<br />
+shoes<br />
+vintage<br />
+dresses<br />
+kids<br />
+leather<br />
+coffee<br />
+skin<br />
+dog</p></blockquote>
+<p>由此可见女性服装时尚依然是最火爆的品类，母婴类排第二，skin和dog上榜也说明了一些问题。</p>
+<p>通过进一步数据分析确实能找到一些竞争小的niche站做的不错的，对于做seo的人很有帮助，但是对我们以facebook买量的来说意义并不是很大，为什么呢：</p>
+<p>一个电商niche站想要做的长久，seo流量必占50%以上，剩下可能20% email流量，10% direct，只有20%通过社交媒体，而且还是通过社交媒体<a href="https://www.shopifynotes.com/shopify87.html" target="_blank">再营销</a>，这才是一个健康长久可持续的niche站的流量占比。</p>
+<p>像我这种纯facebook买量的，说白了就是赚一个流量差价，不管是做电商，做app，做游戏，核心思想就是赚流量差价，media buy端尽量通过创意降低买量成本，变现端通过各种营销手段提高变现效率，只要最后算下来是赚的，放大就行了，简单粗暴。做的细致一点可以把流量沉淀，养一养粉丝，养一养邮件列表，不过这些还是提高变现效率的手段罢了。我上spy网站一搜，能看到无数个爆款，花一小时就能让这些产品变成我的产品，再花一小时就能让他们的广告变成我的广告，我有这么多已经别人验证过的爆款等着我去上，又何必要在意这些大海捞针的niche站呢？</p>
+<p>&nbsp;</p>
+<p>所以与其跟风折腾这些有的没的，还不如打打基本功。如果给你一个<a href="https://www.shopifynotes.com/shopify66.html" target="_blank">竞品网站</a>，给你他正卖的爆款，给你他的facebook广告，给你他的进货渠道，那你能不能跟上，用同样的产品，同样的广告，卖出利润变成自己的爆款？别以为很简单，90%的人都做不到，所以先把这些练好吧兄弟。</p>
+<p>&nbsp;</p>
+<p>一个破数据还有人卖特么800，留言免费送</p>
+<hr />
+<p>没想到大家对这个东西热情这么高，一个一个发太麻烦了，现在把下载链接放出来可以自行下载：</p>
+<blockquote><p><strong><a href="https://delivery.shopifyapps.com/-/030f032a5dad45e6/f9af741f425524d2" target="_blank">shopify采集数据下载</a></strong></p></blockquote>
+<p>不过这是5月份的了，shopify店铺每天都有大批新增同时有大批死亡，这个数据的参考意义请自行判断。</p>
+        </div>
+        <section class="view-tag">
+            <div class="pull-left"><i class="fa fa-tags"></i> <a href="https://www.shopifynotes.com/shopifytag/shopify%e5%b9%bf%e5%91%8a" rel="tag">shopify广告</a><a href="https://www.shopifynotes.com/shopifytag/shopify%e6%95%99%e7%a8%8b" rel="tag">shopify教程</a></div>
+        </section>
+                <section id="comments">
+            
+<div class="comment-head clearfix">
+    <div class="pull-left">65条评论</div>
+    <div class="pull-right"><a href="#respond"><i class="fa fa-pencil"></i> 添加新评论</a></div>
+</div>
+<ul>
+    <li id="comment-li-25" class="comment_li">
+    <div id="comment-25">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/adf6ff3bf1fa18ae31b92d94cdc60a05?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/adf6ff3bf1fa18ae31b92d94cdc60a05?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">奥特曼</p>
+                <p class="comment_time">2018年6月3日 上午3:27</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=25#respond' onclick='return addComment.moveForm( "comment-25", "25", "respond", "89" )' aria-label='回复给奥特曼'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>好东东好产品真的很多，其实做足一两个细分就吃不完，<br />
+请问spy网站有哪些啊，能否分享一两个呢       关注老铁已久，期带回复 ：D</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-51" class="comment_li">
+    <div id="comment-51">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2018年7月19日 上午12:07</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=51#respond' onclick='return addComment.moveForm( "comment-51", "51", "respond", "89" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p><a href="https://www.shopifynotes.com/shopify93.html" target="_blank" rel="noopener"><strong>Facebook最强spy工具</strong></a></p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-30" class="comment_li">
+    <div id="comment-30">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/4d84bb22e06f21c1aa76b0728eec865e?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/4d84bb22e06f21c1aa76b0728eec865e?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">大怪兽</p>
+                <p class="comment_time">2018年6月11日 上午11:58</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=30#respond' onclick='return addComment.moveForm( "comment-30", "30", "respond", "89" )' aria-label='回复给大怪兽'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>无意间发现大佬的博客，干货很多，留言支持下；BTW，我也对那价值800的破数据感兴趣，能否分享下呢</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-52" class="comment_li">
+    <div id="comment-52">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2018年7月19日 上午12:07</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=52#respond' onclick='return addComment.moveForm( "comment-52", "52", "respond", "89" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>留邮箱</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-36" class="comment_li">
+    <div id="comment-36">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/ffe91ba065ee35813b02af505f49f991?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/ffe91ba065ee35813b02af505f49f991?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">嘎嘎</p>
+                <p class="comment_time">2018年6月21日 下午11:45</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=36#respond' onclick='return addComment.moveForm( "comment-36", "36", "respond", "89" )' aria-label='回复给嘎嘎'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>圈子就这么大卖800都知道是谁          谢谢大叔福利     598188886@qq.com</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-50" class="comment_li">
+    <div id="comment-50">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2018年7月19日 上午12:07</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=50#respond' onclick='return addComment.moveForm( "comment-50", "50", "respond", "89" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>已发</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-169" class="comment_li">
+    <div id="comment-169">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/218be01233fc719c34a9c4397ffe4f25?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/218be01233fc719c34a9c4397ffe4f25?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">cszone</p>
+                <p class="comment_time">2018年9月24日 下午9:55</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=169#respond' onclick='return addComment.moveForm( "comment-169", "169", "respond", "89" )' aria-label='回复给cszone'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>大叔  求数据<br />
+1914175@qq.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-38" class="comment_li">
+    <div id="comment-38">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/e6066be4db7e9bced9111f7a5bbcef02?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/e6066be4db7e9bced9111f7a5bbcef02?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">shania</p>
+                <p class="comment_time">2018年6月22日 下午1:27</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=38#respond' onclick='return addComment.moveForm( "comment-38", "38", "respond", "89" )' aria-label='回复给shania'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>求数据，谢谢</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-53" class="comment_li">
+    <div id="comment-53">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2018年7月19日 上午12:07</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=53#respond' onclick='return addComment.moveForm( "comment-53", "53", "respond", "89" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>留邮箱</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-47" class="comment_li">
+    <div id="comment-47">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/b452cd5bedb6a19b3ba1993e682cfe04?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/b452cd5bedb6a19b3ba1993e682cfe04?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">tom</p>
+                <p class="comment_time">2018年7月18日 上午9:47</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=47#respond' onclick='return addComment.moveForm( "comment-47", "47", "respond", "89" )' aria-label='回复给tom'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>谢谢Alex是大叔 的干货分享<br />
+方便的话 请分享一些数据 呵呵 期待您的回复</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-54" class="comment_li">
+    <div id="comment-54">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2018年7月19日 上午12:07</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=54#respond' onclick='return addComment.moveForm( "comment-54", "54", "respond", "89" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>留邮箱</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-48" class="comment_li">
+    <div id="comment-48">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/71fb6ec1df0bbdbadd97e3fc39859e83?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/71fb6ec1df0bbdbadd97e3fc39859e83?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">JackyNew</p>
+                <p class="comment_time">2018年7月18日 下午5:39</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=48#respond' onclick='return addComment.moveForm( "comment-48", "48", "respond", "89" )' aria-label='回复给JackyNew'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>博主，你用的什么网站看的其他人广告，目前我仅知道一个 https://adespresso.com/ads-examples/<br />
+但是这个不是很全，广告也一般</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-49" class="comment_li">
+    <div id="comment-49">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2018年7月19日 上午12:06</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=49#respond' onclick='return addComment.moveForm( "comment-49", "49", "respond", "89" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>看我最新文章</p>
+<blockquote><p><strong><a href="https://www.shopifynotes.com/shopify93.html" target="_blank" rel="noopener">Facebook最强spy工具</a></strong></p></blockquote>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-69" class="comment_li">
+    <div id="comment-69">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/02824b99395b4ab2b7f0605427d2618a?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/02824b99395b4ab2b7f0605427d2618a?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">2214997044@qq.com</p>
+                <p class="comment_time">2018年7月20日 下午5:15</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=69#respond' onclick='return addComment.moveForm( "comment-69", "69", "respond", "89" )' aria-label='回复给2214997044@qq.com'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>哈哈，求数据啊2214997044@qq.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-70" class="comment_li">
+    <div id="comment-70">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/eff46f10ee824c20f5c47242f92cae78?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/eff46f10ee824c20f5c47242f92cae78?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Portia</p>
+                <p class="comment_time">2018年7月22日 下午11:49</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=70#respond' onclick='return addComment.moveForm( "comment-70", "70", "respond", "89" )' aria-label='回复给Portia'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>大叔我也要</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-73" class="comment_li">
+    <div id="comment-73">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/7d4fdeffc7bdefce537022e02e5df4b0?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/7d4fdeffc7bdefce537022e02e5df4b0?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Mark</p>
+                <p class="comment_time">2018年7月24日 下午9:19</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=73#respond' onclick='return addComment.moveForm( "comment-73", "73", "respond", "89" )' aria-label='回复给Mark'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>243277775@qq.com 大叔，数据可否送我一份 谢谢</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-75" class="comment_li">
+    <div id="comment-75">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/fcd989ad293fe2efcbda63e57493bb82?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/fcd989ad293fe2efcbda63e57493bb82?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Emma</p>
+                <p class="comment_time">2018年7月31日 下午9:34</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=75#respond' onclick='return addComment.moveForm( "comment-75", "75", "respond", "89" )' aria-label='回复给Emma'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>大叔， 能加一下及时通讯工具吗？  我有产品, shopify店铺正在建立中。</p>
+<p>我非常好奇是否所有产品都能通过fb获取销量? 区别只是广告数据是否跑到位？</p>
+<p>谢谢</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-80" class="comment_li">
+    <div id="comment-80">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2018年8月7日 上午10:07</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=80#respond' onclick='return addComment.moveForm( "comment-80", "80", "respond", "89" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>主要是看产品，产品如果不行投放再厉害也卖不出去</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-78" class="comment_li">
+    <div id="comment-78">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/4f401bef35ce6e564c4375974d377b67?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/4f401bef35ce6e564c4375974d377b67?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">LuckyYoung</p>
+                <p class="comment_time">2018年8月3日 下午6:43</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=78#respond' onclick='return addComment.moveForm( "comment-78", "78", "respond", "89" )' aria-label='回复给LuckyYoung'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>Alex不是大叔，是干货啊！可以发我下800的数据吗？邮箱：luckyyoungdev@gmail.com<br />
+PS：强烈建议开通赞赏功能！</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-79" class="comment_li">
+    <div id="comment-79">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/a84bc99897a210711c6d117f01437afd?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/a84bc99897a210711c6d117f01437afd?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Angelina</p>
+                <p class="comment_time">2018年8月6日 下午5:02</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=79#respond' onclick='return addComment.moveForm( "comment-79", "79", "respond", "89" )' aria-label='回复给Angelina'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>博主发的都是干货，崇拜。可以分享一下数据吗？<br />
+Angelinahe@126.com<br />
+谢谢啦。</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-84" class="comment_li">
+    <div id="comment-84">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/b9c8271c3e59800107057ecf1127e9ec?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/b9c8271c3e59800107057ecf1127e9ec?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">carol</p>
+                <p class="comment_time">2018年8月14日 上午11:19</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=84#respond' onclick='return addComment.moveForm( "comment-84", "84", "respond", "89" )' aria-label='回复给carol'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>谢谢大叔，同求一份<br />
+xiaolong_maya@163.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-88" class="comment_li">
+    <div id="comment-88">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/54c3515967c12f1d19e1373f7a1eb88f?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/54c3515967c12f1d19e1373f7a1eb88f?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">沁</p>
+                <p class="comment_time">2018年8月19日 下午4:12</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=88#respond' onclick='return addComment.moveForm( "comment-88", "88", "respond", "89" )' aria-label='回复给沁'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>通过google搜索到大叔文章，都是干货。希望可以分享下数据。<br />
+i.cci@qq.com<br />
+thanks</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-89" class="comment_li">
+    <div id="comment-89">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/010e4801e4fe1089b7a9369853465221?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/010e4801e4fe1089b7a9369853465221?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">不想取名字了</p>
+                <p class="comment_time">2018年8月19日 下午10:06</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=89#respond' onclick='return addComment.moveForm( "comment-89", "89", "respond", "89" )' aria-label='回复给不想取名字了'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>好奇值800的破数据，哈哈。。<br />
+另外，大叔这段话，“1.Shopify收款需要用paypal商家账户，个人没有营业执照也可以使用商家账户，在后台就可以从个人账户升级到商家账户。公司名字就用你的网站logo名，地址填和你住址一样，后台还有几个商家小验证，都很好解决，一一填写就行。”地址要上传资料证明，这种上传水电费单子都可以吗？ 我最近就是在个人账户升级商家账户的时候，Paypal被限制了。请问大叔是怎么解决的呢？邮箱已留，期待回复。</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-149" class="comment_li">
+    <div id="comment-149">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/54c3515967c12f1d19e1373f7a1eb88f?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/54c3515967c12f1d19e1373f7a1eb88f?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">沁</p>
+                <p class="comment_time">2018年9月11日 上午8:48</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=149#respond' onclick='return addComment.moveForm( "comment-149", "149", "respond", "89" )' aria-label='回复给沁'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>你好，请问你限制升级成功没，我也是个人升级商家账户被限制了，PayPal要求必须上传营业执照才能解除限制。可以加我Q交流下么，1034805729</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-212" class="comment_li">
+    <div id="comment-212">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2018年11月15日 下午11:52</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=212#respond' onclick='return addComment.moveForm( "comment-212", "212", "respond", "89" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>地址证明最好用信用卡流水单，有自己姓名的。不过其实这些东西你要是和客服打电话沟通好都不是问题</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-91" class="comment_li">
+    <div id="comment-91">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/2dea9198e4f9455b08edc88ff95a5cd7?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/2dea9198e4f9455b08edc88ff95a5cd7?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">George Liu</p>
+                <p class="comment_time">2018年8月20日 下午10:36</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=91#respond' onclick='return addComment.moveForm( "comment-91", "91", "respond", "89" )' aria-label='回复给George Liu'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>突然发现大佬一枚。膜拜，想看一下数据。<br />
+邮箱：lg582228486@gmail.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-92" class="comment_li">
+    <div id="comment-92">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/3b51a60509ed10fba3419edeee450348?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/3b51a60509ed10fba3419edeee450348?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">香木堂主</p>
+                <p class="comment_time">2018年8月22日 上午12:42</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=92#respond' onclick='return addComment.moveForm( "comment-92", "92", "respond", "89" )' aria-label='回复给香木堂主'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>谢谢大叔  我刚开始学shopify，跪求资源2479813743@qq.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-98" class="comment_li">
+    <div id="comment-98">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/828d62cbbdd093db34dcd1f4225047c0?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/828d62cbbdd093db34dcd1f4225047c0?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">枯の灵</p>
+                <p class="comment_time">2018年8月26日 上午1:06</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=98#respond' onclick='return addComment.moveForm( "comment-98", "98", "respond", "89" )' aria-label='回复给枯の灵'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>支持博主！<br />
+请分享一份 希望有机会请博主吃饭<br />
+fapbiao@gmail.com</p>
+<p>多谢</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-105" class="comment_li">
+    <div id="comment-105">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/9ba27a2cb4e6bd9612b83a859886c815?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/9ba27a2cb4e6bd9612b83a859886c815?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">charles</p>
+                <p class="comment_time">2018年8月29日 下午3:32</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=105#respond' onclick='return addComment.moveForm( "comment-105", "105", "respond", "89" )' aria-label='回复给charles'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>Charles8260@hotmail.com 恳请楼主分享，非常感谢！</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-106" class="comment_li">
+    <div id="comment-106">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/64ffd3c87dc569757ea7e7c39e92f7ef?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/64ffd3c87dc569757ea7e7c39e92f7ef?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">vicky</p>
+                <p class="comment_time">2018年8月29日 下午4:17</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=106#respond' onclick='return addComment.moveForm( "comment-106", "106", "respond", "89" )' aria-label='回复给vicky'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>大神！全是干货，受教了！不过同好奇800的破数据</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-107" class="comment_li">
+    <div id="comment-107">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/64ffd3c87dc569757ea7e7c39e92f7ef?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/64ffd3c87dc569757ea7e7c39e92f7ef?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">vicky</p>
+                <p class="comment_time">2018年8月29日 下午4:20</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=107#respond' onclick='return addComment.moveForm( "comment-107", "107", "respond", "89" )' aria-label='回复给vicky'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>大神，求800的破数据，邮箱397743985@qq.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-109" class="comment_li">
+    <div id="comment-109">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/89beea80fad791657b973bce42ee1e90?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/89beea80fad791657b973bce42ee1e90?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">jiang</p>
+                <p class="comment_time">2018年8月30日 下午10:34</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=109#respond' onclick='return addComment.moveForm( "comment-109", "109", "respond", "89" )' aria-label='回复给jiang'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>一看就是自己实践得来的经验，求数据jiangling@sailvan.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-124" class="comment_li">
+    <div id="comment-124">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/9cd07842b99989ff18fddd39776257f8?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/9cd07842b99989ff18fddd39776257f8?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">柠檬子</p>
+                <p class="comment_time">2018年9月5日 下午5:56</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=124#respond' onclick='return addComment.moveForm( "comment-124", "124", "respond", "89" )' aria-label='回复给柠檬子'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>新手小白一个，目前在某小公司做亚马逊运营，因为公司有自己的品牌所以开了shopify的独立站我也因此接触到不少。<br />
+不想一辈子打工所以跟小伙伴决定合伙做一个独立站，在网上搜了不少资料，最后发现你的这个博客。<br />
+大叔真的很厉害，我研究了两天，基本能够解决我目前所遇到的难题了<br />
+十分感谢大叔，希望能够持续更新（づ￣3￣）づ╭❤～<br />
+yikzixin@gmail.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-150" class="comment_li">
+    <div id="comment-150">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/b69a0e3e66aa02e205719bf6fe6e8cf4?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/b69a0e3e66aa02e205719bf6fe6e8cf4?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">月小筑</p>
+                <p class="comment_time">2018年9月11日 下午3:46</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=150#respond' onclick='return addComment.moveForm( "comment-150", "150", "respond", "89" )' aria-label='回复给月小筑'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>通过搜索Shopify收款方式进来的，惊喜的发现了大神，可以麻烦分享一份给我这个小白学习一下吗？谢谢.435091495@qq.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-152" class="comment_li">
+    <div id="comment-152">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/30f9dd9aabbaa16620f6bf0a301d6d3e?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/30f9dd9aabbaa16620f6bf0a301d6d3e?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Demi</p>
+                <p class="comment_time">2018年9月13日 上午12:44</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=152#respond' onclick='return addComment.moveForm( "comment-152", "152", "respond", "89" )' aria-label='回复给Demi'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>谢谢大叔分享，求数据，小白想学习下 872766200@qq.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-155" class="comment_li">
+    <div id="comment-155">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/34054dd6889b58fada8129444036a2db?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/34054dd6889b58fada8129444036a2db?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">hill</p>
+                <p class="comment_time">2018年9月16日 上午1:47</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=155#respond' onclick='return addComment.moveForm( "comment-155", "155", "respond", "89" )' aria-label='回复给hill'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>谢谢博主了mmmczf@outlook.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-156" class="comment_li">
+    <div id="comment-156">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/520591415eadc03cfef47f38145b3e53?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/520591415eadc03cfef47f38145b3e53?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">may</p>
+                <p class="comment_time">2018年9月17日 下午5:22</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=156#respond' onclick='return addComment.moveForm( "comment-156", "156", "respond", "89" )' aria-label='回复给may'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>谢谢大叔分享，求数据，感谢干货指引 893764280@qq.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-164" class="comment_li">
+    <div id="comment-164">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/a9dbd96068afd9fff620a765c3b8b5ab?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/a9dbd96068afd9fff620a765c3b8b5ab?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">fireflyzgb</p>
+                <p class="comment_time">2018年9月22日 上午5:02</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=164#respond' onclick='return addComment.moveForm( "comment-164", "164", "respond", "89" )' aria-label='回复给fireflyzgb'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>新手刚上路，有些东西看不懂，要多泡泡啊。<br />
+数据我也想来一份fireflyzgb@gmail.com,多谢大神</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-165" class="comment_li">
+    <div id="comment-165">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/218be01233fc719c34a9c4397ffe4f25?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/218be01233fc719c34a9c4397ffe4f25?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">cszonr</p>
+                <p class="comment_time">2018年9月22日 下午11:13</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=165#respond' onclick='return addComment.moveForm( "comment-165", "165", "respond", "89" )' aria-label='回复给cszonr'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>1914175@qq.com  谢谢分享，大叔，求数据</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-166" class="comment_li">
+    <div id="comment-166">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/218be01233fc719c34a9c4397ffe4f25?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/218be01233fc719c34a9c4397ffe4f25?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">cszone</p>
+                <p class="comment_time">2018年9月23日 上午10:19</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=166#respond' onclick='return addComment.moveForm( "comment-166", "166", "respond", "89" )' aria-label='回复给cszone'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>大叔，求数据，邮箱1914175@qq.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-168" class="comment_li">
+    <div id="comment-168">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/ab9a4c5526a9b39afd34b0f874ec3a86?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/ab9a4c5526a9b39afd34b0f874ec3a86?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">amy</p>
+                <p class="comment_time">2018年9月24日 下午4:12</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=168#respond' onclick='return addComment.moveForm( "comment-168", "168", "respond", "89" )' aria-label='回复给amy'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>谢谢 分享 数据 xqy122910@gmail.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-170" class="comment_li">
+    <div id="comment-170">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/08d9c0c4d2d13fa3ee75db7c0939c769?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/08d9c0c4d2d13fa3ee75db7c0939c769?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">yan</p>
+                <p class="comment_time">2018年9月25日 下午12:24</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=170#respond' onclick='return addComment.moveForm( "comment-170", "170", "respond", "89" )' aria-label='回复给yan'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>597046466#qq.com 多谢分享</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-172" class="comment_li">
+    <div id="comment-172">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/c87db2f90d80af5f2e3485b77ca1b29c?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/c87db2f90d80af5f2e3485b77ca1b29c?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">zzzz</p>
+                <p class="comment_time">2018年9月26日 上午10:06</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=172#respond' onclick='return addComment.moveForm( "comment-172", "172", "respond", "89" )' aria-label='回复给zzzz'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>求数据，交流，谢谢</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-178" class="comment_li">
+    <div id="comment-178">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/8edf45f4c07938fb0e85a0b3b88a065b?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/8edf45f4c07938fb0e85a0b3b88a065b?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">SimonH</p>
+                <p class="comment_time">2018年9月28日 上午11:06</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=178#respond' onclick='return addComment.moveForm( "comment-178", "178", "respond", "89" )' aria-label='回复给SimonH'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>大虾，求数据呀。谢谢。35743155@qq.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-179" class="comment_li">
+    <div id="comment-179">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/f1bc36235abd4cad4e7ce4ebe0b8bd2c?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/f1bc36235abd4cad4e7ce4ebe0b8bd2c?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">大马哈</p>
+                <p class="comment_time">2018年9月28日 上午11:22</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=179#respond' onclick='return addComment.moveForm( "comment-179", "179", "respond", "89" )' aria-label='回复给大马哈'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>刚入行的小白，看到大神的博客，很实用！数据能分享给我一份吗，1207168997@qq.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-180" class="comment_li">
+    <div id="comment-180">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/af31ef24e692803bc353e5e2e0e0f00b?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/af31ef24e692803bc353e5e2e0e0f00b?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Gorgeu</p>
+                <p class="comment_time">2018年9月28日 下午8:33</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=180#respond' onclick='return addComment.moveForm( "comment-180", "180", "respond", "89" )' aria-label='回复给Gorgeu'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>你好，我想学习下这方面的东西，能否把数据发我 hkankan@gmail.com  谢谢呀。</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-181" class="comment_li">
+    <div id="comment-181">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/92413200a5ae52b6b83b04db37dd2303?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/92413200a5ae52b6b83b04db37dd2303?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">swan</p>
+                <p class="comment_time">2018年9月30日 下午2:59</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=181#respond' onclick='return addComment.moveForm( "comment-181", "181", "respond", "89" )' aria-label='回复给swan'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>谢谢，也想略览数据， 120428543@qq.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-182" class="comment_li">
+    <div id="comment-182">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/e3079fa40a354ffcf2bb89a15352efff?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/e3079fa40a354ffcf2bb89a15352efff?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Andy</p>
+                <p class="comment_time">2018年10月9日 上午9:20</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=182#respond' onclick='return addComment.moveForm( "comment-182", "182", "respond", "89" )' aria-label='回复给Andy'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>谢谢Alex分享，求数据。2243708783@qq.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-185" class="comment_li">
+    <div id="comment-185">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/776742a995e65adfea7bd6eacf7c0260?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/776742a995e65adfea7bd6eacf7c0260?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">sunny</p>
+                <p class="comment_time">2018年10月12日 下午2:54</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=185#respond' onclick='return addComment.moveForm( "comment-185", "185", "respond", "89" )' aria-label='回复给sunny'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>谷歌的时候发现大佬的博客，对我这样的小白帮助很大，大佬可否分享下数据，邮箱805902180@qq.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-190" class="comment_li">
+    <div id="comment-190">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6a37ef86a72eb64b9a9ea1830665ced9?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6a37ef86a72eb64b9a9ea1830665ced9?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">iam1988</p>
+                <p class="comment_time">2018年10月16日 下午9:38</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=190#respond' onclick='return addComment.moveForm( "comment-190", "190", "respond", "89" )' aria-label='回复给iam1988'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>已分享你的网站到朋友圈，感谢博主无私分享。<br />
+iam1988@mail.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-191" class="comment_li">
+    <div id="comment-191">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/23b3e6974923fe85394438f8b31e9079?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/23b3e6974923fe85394438f8b31e9079?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">喜萍</p>
+                <p class="comment_time">2018年10月17日 下午1:44</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=191#respond' onclick='return addComment.moveForm( "comment-191", "191", "respond", "89" )' aria-label='回复给喜萍'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>一起入行时间差不多，求数据。</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-192" class="comment_li">
+    <div id="comment-192">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/f130320d081ab9df21ac86ea4753150b?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/f130320d081ab9df21ac86ea4753150b?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Vioos</p>
+                <p class="comment_time">2018年10月18日 下午9:52</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=192#respond' onclick='return addComment.moveForm( "comment-192", "192", "respond", "89" )' aria-label='回复给Vioos'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>大叔是大神，每一篇都是干货，而且很详细</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-193" class="comment_li">
+    <div id="comment-193">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/f130320d081ab9df21ac86ea4753150b?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/f130320d081ab9df21ac86ea4753150b?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Vioos</p>
+                <p class="comment_time">2018年10月18日 下午9:52</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=193#respond' onclick='return addComment.moveForm( "comment-193", "193", "respond", "89" )' aria-label='回复给Vioos'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>大叔是大神，每一篇都是干货，而且很详细   麻烦发一份 谢谢 wocexcom@gmail.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-195" class="comment_li">
+    <div id="comment-195">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/f2710fb65ff21eace737e94f18fd66a0?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/f2710fb65ff21eace737e94f18fd66a0?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Bera</p>
+                <p class="comment_time">2018年10月22日 下午4:01</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=195#respond' onclick='return addComment.moveForm( "comment-195", "195", "respond", "89" )' aria-label='回复给Bera'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>谢谢大叔，我也想要一份。sk276@yahoo.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-199" class="comment_li">
+    <div id="comment-199">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/f97c8f8bf42a35bd05fe0a7e90d97d8f?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/f97c8f8bf42a35bd05fe0a7e90d97d8f?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">这个小子</p>
+                <p class="comment_time">2018年11月1日 上午8:54</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=199#respond' onclick='return addComment.moveForm( "comment-199", "199", "respond", "89" )' aria-label='回复给这个小子'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>谢谢分享一下！求数据！2655586830@qq.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-205" class="comment_li">
+    <div id="comment-205">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/46b58678d5040dd7d413318912d44c49?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/46b58678d5040dd7d413318912d44c49?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">benny</p>
+                <p class="comment_time">2018年11月12日 下午5:28</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=205#respond' onclick='return addComment.moveForm( "comment-205", "205", "respond", "89" )' aria-label='回复给benny'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>谢谢分享，求数据，小白想学习下 88352496@qq.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-207" class="comment_li">
+    <div id="comment-207">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/4b6b38ec75a21a63713a9bd90e5e0ec1?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/4b6b38ec75a21a63713a9bd90e5e0ec1?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Marketingshiang</p>
+                <p class="comment_time">2018年11月14日 下午2:50</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=207#respond' onclick='return addComment.moveForm( "comment-207", "207", "respond", "89" )' aria-label='回复给Marketingshiang'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>感谢Alex大叔的众多Shopify经典好文。marketingshiang (at) gmail.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-210" class="comment_li">
+    <div id="comment-210">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/96fb30f6ab3fcb36e1daf2b1baba2a62?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/96fb30f6ab3fcb36e1daf2b1baba2a62?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">lee wendy</p>
+                <p class="comment_time">2018年11月15日 下午3:35</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=210#respond' onclick='return addComment.moveForm( "comment-210", "210", "respond", "89" )' aria-label='回复给lee wendy'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>谢谢分享,victorgameceo@gmail.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-555" class="comment_li">
+    <div id="comment-555">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/e1d10b0a36b10eadf5fb3f9a34131dee?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/e1d10b0a36b10eadf5fb3f9a34131dee?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">sam</p>
+                <p class="comment_time">2019年4月27日 上午9:37</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=555#respond' onclick='return addComment.moveForm( "comment-555", "555", "respond", "89" )' aria-label='回复给sam'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>求大神800的破数据，413965903@qq.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-563" class="comment_li">
+    <div id="comment-563">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/dcf5d403223e6411331213f0a1bf9a22?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/dcf5d403223e6411331213f0a1bf9a22?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Siro</p>
+                <p class="comment_time">2019年5月5日 下午10:11</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=563#respond' onclick='return addComment.moveForm( "comment-563", "563", "respond", "89" )' aria-label='回复给Siro'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>现在来还迟不迟!<br />
+lxr00518@gmail.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-635" class="comment_li">
+    <div id="comment-635">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/028e46044c06b30f48364bcc9236bb43?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/028e46044c06b30f48364bcc9236bb43?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">victor</p>
+                <p class="comment_time">2019年7月21日 上午7:52</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=635#respond' onclick='return addComment.moveForm( "comment-635", "635", "respond", "89" )' aria-label='回复给victor'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>大叔 求数据 thanks</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-636" class="comment_li">
+    <div id="comment-636">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/8f697606ce000dff89238e99e7cac0e7?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/8f697606ce000dff89238e99e7cac0e7?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">victor</p>
+                <p class="comment_time">2019年7月21日 上午7:52</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=636#respond' onclick='return addComment.moveForm( "comment-636", "636", "respond", "89" )' aria-label='回复给victor'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>大叔 求数据 thanks<br />
+victor@nestwodesign.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-691" class="comment_li">
+    <div id="comment-691">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/22a95755e50ca57da1bd0ef3cad56685?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/22a95755e50ca57da1bd0ef3cad56685?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">ka1</p>
+                <p class="comment_time">2019年8月22日 上午10:36</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=691#respond' onclick='return addComment.moveForm( "comment-691", "691", "respond", "89" )' aria-label='回复给ka1'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>alex大佬，想要一份数据，感谢！ 邮箱klegher@163.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-795" class="comment_li">
+    <div id="comment-795">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/06b042af9eeff2e152024431c9144ee2?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/06b042af9eeff2e152024431c9144ee2?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">ella</p>
+                <p class="comment_time">2019年11月13日 下午10:50</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=795#respond' onclick='return addComment.moveForm( "comment-795", "795", "respond", "89" )' aria-label='回复给ella'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>大叔 求数据 thanks<br />
+liposhape2019@hotmail.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+<li id="comment-li-796" class="comment_li">
+    <div id="comment-796">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/650f204cbe09532702e0dcf1f3457374?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/650f204cbe09532702e0dcf1f3457374?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">ella</p>
+                <p class="comment_time">2019年11月13日 下午10:52</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify89.html?replytocom=796#respond' onclick='return addComment.moveForm( "comment-796", "796", "respond", "89" )' aria-label='回复给ella'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>大叔 求数据 thanks<br />
+liposhape2019@hotmail.com</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ul>
+	<div id="respond" class="comment-respond">
+		<h4 id="reply-title" class="comment-reply-title">发表评论 <small><a rel="nofollow" id="cancel-comment-reply-link" href="/shopify89.html?User-Agent=Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%3B+rv%3A65.0%29+Gecko%2F20100101+Firefox%2F65.0#respond" style="display:none;">取消回复</a></small></h4>			<form action="https://www.shopifynotes.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+				<p class="comment-notes"><span id="email-notes">电子邮件地址不会被公开。</span> 必填项已用<span class="required">*</span>标注</p><div class="comment form-group has-feedback"><textarea class="form-control" id="comment" placeholder=" " name="comment" rows="5" aria-required="true" required  onkeydown="if(event.ctrlKey){if(event.keyCode==13){document.getElementById('submit').click();return false}};"></textarea></div><div class="comment-form-author form-group has-feedback"><div class="input-group"><div class="input-group-addon"><i class="fa fa-user"></i></div><input class="form-control" placeholder="昵称" id="author" name="author" type="text" value="" " size="30" /><span class="form-control-feedback required">*</span></div></div>
+<div class="comment-form-email form-group has-feedback"><div class="input-group"><div class="input-group-addon"><i class="fa fa-envelope-o"></i></div><input class="form-control" placeholder="邮箱" id="email" name="email" type="text" value="" " size="30" /><span class="form-control-feedback required">*</span></div></div>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="btn btn-primary" value="发表评论" /> <input type='hidden' name='comment_post_ID' value='89' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="e1c3076c68" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="193"/></p>			</form>
+			</div><!-- #respond -->
+	        </section>
+    </article>
+    <section class="col-md-8 col-md-offset-2 clearfix">
+    <div class="read">
+        <div class="read-head"> <i class="fa fa-book"></i> 更多阅读 </div>
+        <div class="read-list row">
+            <div class="col-md-6">
+                <ul>
+                                    </ul>
+            </div>
+            <div class="col-md-6">
+                <ul>
+                                    <li><a href="https://www.shopifynotes.com/shopify54.html" title="shopify收款方式之 &#8211; 如何申请stripe（19年更新成功率100%）">shopify收款方式之 &#8211; 如何申请stripe（19年更新成功率100%）</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify36.html" title="如何一键批量无损压缩产品图片">如何一键批量无损压缩产品图片</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify14.html" title="做shopify什么样的facebook广告才是好广告？- 亲身案例教会你">做shopify什么样的facebook广告才是好广告？- 亲身案例教会你</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify45.html" title="如何自动屏蔽Facebook帖子差评？">如何自动屏蔽Facebook帖子差评？</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify123.html" title="如何从亚马逊/Opencart/WooCommerce等平台导入导出产品到Shopify？">如何从亚马逊/Opencart/WooCommerce等平台导入导出产品到Shopify？</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify89.html" title="聊聊前段时间爆火的shopify60万店铺大数据分析">聊聊前段时间爆火的shopify60万店铺大数据分析</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify51.html" title="shopify开店必备app推荐 &#8211; 这些app能大幅提升ROI">shopify开店必备app推荐 &#8211; 这些app能大幅提升ROI</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify66.html" title="大叔教你如何分析一个竞品Shopify店铺">大叔教你如何分析一个竞品Shopify店铺</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify78.html" title="使用google analytics优化你的每一条facebook广告">使用google analytics优化你的每一条facebook广告</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify87.html" title="shopify推广技巧之初级facebook再营销">shopify推广技巧之初级facebook再营销</a></li>
+                                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="read">
+        <div class="read-head"> <i class="fa fa-tags"></i> 标签云 </div>
+        <div class="read-list">
+            <a href="https://www.shopifynotes.com/shopifytag/dropshipping%e6%95%99%e7%a8%8b" class="tag-cloud-link tag-link-29 tag-link-position-1" style="font-size: 10.863636363636pt;" aria-label="dropshipping教程 (2个项目)">dropshipping教程</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook-spy%e5%b7%a5%e5%85%b7" class="tag-cloud-link tag-link-26 tag-link-position-2" style="font-size: 8pt;" aria-label="facebook spy工具 (1个项目)">facebook spy工具</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e5%86%8d%e8%90%a5%e9%94%80" class="tag-cloud-link tag-link-25 tag-link-position-3" style="font-size: 8pt;" aria-label="facebook再营销 (1个项目)">facebook再营销</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e5%b9%bf%e5%91%8a" class="tag-cloud-link tag-link-20 tag-link-position-4" style="font-size: 12.772727272727pt;" aria-label="facebook广告 (3个项目)">facebook广告</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e5%b9%bf%e5%91%8aspy" class="tag-cloud-link tag-link-27 tag-link-position-5" style="font-size: 8pt;" aria-label="facebook广告spy (1个项目)">facebook广告spy</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e5%b9%bf%e5%91%8a%e6%95%99%e7%a8%8b" class="tag-cloud-link tag-link-10 tag-link-position-6" style="font-size: 12.772727272727pt;" aria-label="facebook广告教程 (3个项目)">facebook广告教程</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e6%8e%a8%e5%b9%bf" class="tag-cloud-link tag-link-21 tag-link-position-7" style="font-size: 10.863636363636pt;" aria-label="facebook推广 (2个项目)">facebook推广</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e6%95%99%e7%a8%8b" class="tag-cloud-link tag-link-14 tag-link-position-8" style="font-size: 12.772727272727pt;" aria-label="facebook教程 (3个项目)">facebook教程</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e7%94%b5%e5%95%86%e5%b9%bf%e5%91%8a" class="tag-cloud-link tag-link-7 tag-link-position-9" style="font-size: 14.363636363636pt;" aria-label="facebook电商广告 (4个项目)">facebook电商广告</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e8%87%aa%e5%8a%a8%e5%88%a0%e5%b7%ae%e8%af%84" class="tag-cloud-link tag-link-15 tag-link-position-10" style="font-size: 8pt;" aria-label="facebook自动删差评 (1个项目)">facebook自动删差评</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify-app" class="tag-cloud-link tag-link-18 tag-link-position-11" style="font-size: 8pt;" aria-label="shopify app (1个项目)">shopify app</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify-dropshipping" class="tag-cloud-link tag-link-28 tag-link-position-12" style="font-size: 8pt;" aria-label="shopify dropshipping (1个项目)">shopify dropshipping</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e5%86%8d%e8%90%a5%e9%94%80" class="tag-cloud-link tag-link-24 tag-link-position-13" style="font-size: 8pt;" aria-label="shopify再营销 (1个项目)">shopify再营销</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e5%b9%bf%e5%91%8a" class="tag-cloud-link tag-link-8 tag-link-position-14" style="font-size: 14.363636363636pt;" aria-label="shopify广告 (4个项目)">shopify广告</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e5%bc%80%e5%ba%97" class="tag-cloud-link tag-link-5 tag-link-position-15" style="font-size: 15.636363636364pt;" aria-label="shopify开店 (5个项目)">shopify开店</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e5%bc%95%e6%b5%81" class="tag-cloud-link tag-link-9 tag-link-position-16" style="font-size: 10.863636363636pt;" aria-label="shopify引流 (2个项目)">shopify引流</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e6%8a%80%e5%b7%a7" class="tag-cloud-link tag-link-13 tag-link-position-17" style="font-size: 12.772727272727pt;" aria-label="shopify技巧 (3个项目)">shopify技巧</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e6%8e%a8%e5%b9%bf" class="tag-cloud-link tag-link-6 tag-link-position-18" style="font-size: 19.772727272727pt;" aria-label="shopify推广 (10个项目)">shopify推广</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e6%8f%92%e4%bb%b6" class="tag-cloud-link tag-link-19 tag-link-position-19" style="font-size: 8pt;" aria-label="shopify插件 (1个项目)">shopify插件</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e6%94%af%e4%bb%98" class="tag-cloud-link tag-link-17 tag-link-position-20" style="font-size: 12.772727272727pt;" aria-label="shopify支付 (3个项目)">shopify支付</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e6%94%b6%e6%ac%be" class="tag-cloud-link tag-link-16 tag-link-position-21" style="font-size: 12.772727272727pt;" aria-label="shopify收款 (3个项目)">shopify收款</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e6%95%99%e7%a8%8b" class="tag-cloud-link tag-link-4 tag-link-position-22" style="font-size: 22pt;" aria-label="shopify教程 (14个项目)">shopify教程</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e7%8b%ac%e7%ab%8b%e7%ab%99" class="tag-cloud-link tag-link-3 tag-link-position-23" style="font-size: 8pt;" aria-label="shopify独立站 (1个项目)">shopify独立站</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e7%ab%9e%e4%ba%89%e5%af%b9%e6%89%8b" class="tag-cloud-link tag-link-23 tag-link-position-24" style="font-size: 8pt;" aria-label="shopify竞争对手 (1个项目)">shopify竞争对手</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e7%ab%9e%e5%93%81%e5%88%86%e6%9e%90" class="tag-cloud-link tag-link-22 tag-link-position-25" style="font-size: 8pt;" aria-label="shopify竞品分析 (1个项目)">shopify竞品分析</a>        </div>
+    </div>
+    </section>
+</div>
+<!--modal-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content single-dashang">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-cny" aria-hidden="true"></i> 打赏支持</h4>
+            </div>
+            <div class="modal-body text-center">
+                <p><img border="0" src="https://tangjie.me/media/AliPay.png"><img border="0" src="https://www.shopifynotes.com/wp-content/uploads/2018/08/%E6%89%93%E8%B5%8F.png"></p>
+                <p>扫描二维码，输入您要打赏的金额</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--modal-->
+
+<div class="footer_search visible-xs visible-sm">
+    <form id="searchform" action="https://www.shopifynotes.com">
+        <div class="input-group">
+            <input type="search" class="form-control" placeholder="搜索…" value="" name="s">
+            <span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button></span>
+        </div>
+    </form>
+</div><!--
+<footer id="footer">
+    <div class="copyright">
+        <p><i class="fa fa-copyright" aria-hidden="true"></i> 2018 <b>产品经理@唐杰</b></p>
+        <p>Powered by <b>WordPress</b>.</p>
+    </div>
+    <div style="display:none;">代码在页面底部，统计标识不会显示，但不影响统计效果</div>
+</footer> -->
+<script type="text/javascript" src="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/js/skel.min.js"></script>
+<script type="text/javascript" src="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/js/util.min.js"></script>
+<script type="text/javascript" src="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/js/nav.js"></script>
+<script type='text/javascript' src='https://www.shopifynotes.com/wp-includes/js/comment-reply.min.js?ver=4.9.13'></script>
+<script async="async" type='text/javascript' src='https://www.shopifynotes.com/wp-content/plugins/akismet/_inc/form.js?ver=4.1.2'></script>
+<script>
+$(function() {
+    $('[data-toggle="tooltip"]').tooltip()
+});
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+</body>
+</html>

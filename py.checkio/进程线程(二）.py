@@ -20,7 +20,8 @@ if __name__=='__main__':
     '''
     p1.start()
     p2.start()
-    p1.join()  #join会阻塞主进程，直到子进程执行完毕。同时这也证明了python不是解释一句执行一句，而是作为整体编译后再执行
-              #不然，join就不会起作用了
+    p1.join()   #join会阻塞主进程，直到子进程执行完毕。
+                # 同时这也证明了python不是解释一句执行一句，而是作为整体编译后再执行
+               #不然，join就不会起作用了
     p2.join()
     print('Process ends')

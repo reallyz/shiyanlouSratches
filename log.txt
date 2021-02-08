@@ -1,0 +1,17 @@
+a55671c HEAD@{0}: commit: 文件IO和在内存中IO 指针的修改seek()
+4576aed HEAD@{1}: commit: 去测试mydict的单元测试文档。
+152e4cc HEAD@{2}: commit: 名为mydict的被测试类
+712017d HEAD@{3}: commit: 错误的抛出与捕获。pyhton作为一门高级语言，抽象性很好，简直就是在说大白话
+c999bbc HEAD@{4}: commit: 元类的对比
+4a62537 HEAD@{5}: commit: 元类的使用，目前看到的应用就是ORM.元类：给类(同一应用方向)批量添加方法
+a09fa91 HEAD@{6}: commit: 调用什么类的方法就是什么类
+61bfb11 HEAD@{7}: commit: 定制类详解，链式调用的返回值是实例
+638a5c0 HEAD@{8}: commit: 访问限制，继承多态，属性(type,isinstance,hasattr,getattr,setattr)，property.鸭子语言
+8922798 HEAD@{9}: commit: 闭包
+c67b8d3 HEAD@{10}: commit: filter:return item where is true
+04d6dc7 HEAD@{11}: commit: test
+0ebabd4 HEAD@{12}: commit: testforversioncontrol
+7270c90 HEAD@{13}: commit: birdlanguage
+f8c1938 HEAD@{14}: commit: new today
+3cc3675 HEAD@{15}: pull origin master --allow-unrelated-histories: Merge made by the 'recursive' strategy.
+ad9859a HEAD@{16}: commit (initial): pythoncheckio

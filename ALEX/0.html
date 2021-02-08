@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>如何从亚马逊/Opencart/WooCommerce等平台导入导出产品到Shopify？</title>
+<meta name="description" content="自从Shopify火了以后，各种厂家纷纷效仿推出了电商自建站的产品-BigCommerce、WooCommerce、Magento、3dcart等等。就连之前的拖拽建站网站：Weebly，Wix等都进来插了一脚推出了电商建站服务。市场充分竞争对于我们广大电商从业者来说其实是好事，但是随着业务不断扩大、我们的SKU越来越多，一旦有了更换平台的想法就会变得非常麻烦。比如我已经做了亚马逊，想建Shopify独立站，或者我已经做Shopify很" />
+<meta name="keywords" content="shopify教程" />
+<link rel="apple-touch-icon" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/images/icon_32.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/images/icon_152.png">
+<link rel="apple-touch-icon" sizes="167x167" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/images/icon_167.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/images/icon_180.png">
+<link rel="icon" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/images/icon_32.png" type="image/x-icon">
+<link rel="stylesheet" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/css/font-awesome.min.css">
+<script type="text/javascript" src="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/js/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/style.css">
+<link rel="pingback" href="https://www.shopifynotes.com/xmlrpc.php" />
+<meta name="dc.title" content="如何从亚马逊/Opencart/WooCommerce等平台导入导出产品到Shopify？ - Shopify跨境电商独立站笔记" />
+<meta name="dc.description" content="自从Shopify火了以后，各种厂家纷纷效仿推出了电商自建站的产品-BigCommerce、WooC&hellip;" />
+<meta name="dc.relation" content="https://www.shopifynotes.com/shopify123.html/" />
+<meta name="dc.source" content="https://www.shopifynotes.com/" />
+<meta name="dc.language" content="zh_CN" />
+<meta name="description" content="自从Shopify火了以后，各种厂家纷纷效仿推出了电商自建站的产品-BigCommerce、WooC&hellip;" />
+<link rel="canonical" href="https://www.shopifynotes.com/shopify123.html/" />
+
+<script async src='https://www.googletagmanager.com/gtag/js?id=UA-110013720-3'></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+jQuery(document).ready(function() {
+	jQuery('a[target="_blank"]').click(function(e) {
+		gtag('event', 'click', {'event_category': 'external links','event_label' : this.href});
+	});
+});
+gtag('config', 'UA-110013720-3' , {'allow_display_features': false,});
+
+</script>
+<style type="text/css">
+a{color:#393e46}
+a:hover{color:#00adb5!important}
+#header{background-color:#393e46}
+.widget .widget-title::after{background-color:#393e46}
+.uptop{border-left-color:#393e46}
+#titleBar .toggle:before{background:#393e46}
+</style>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110013720-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-110013720-3');
+</script>
+
+</head>
+
+<body>
+<header id="header">
+    <div class="avatar"><a href="https://www.shopifynotes.com" title="Shopify跨境电商独立站笔记"><img src="https://shopifynotes.com/wp-content/uploads/2018/04/shopify笔记.jpg" alt="Shopify跨境电商独立站笔记" class="img-circle" width="50%"></a></div>
+    <h1 id="name"><a href="https://www.shopifynotes.com" title="Shopify跨境电商独立站笔记" style="color:#fff">Alex是大叔</a></h1>
+    <div class="sns">
+                                            </div>
+    <div class="nav">
+        <ul><li><a href="https://shopifynotes.com/">首页</a></li>
+<li><a href="https://www.shopifynotes.com/shopifycategory/shopify-facebook-ads">Facebook广告教程</a></li>
+<li><a href="https://www.shopifynotes.com/shopifycategory/shopifynotes">Shopify操作笔记</a></li>
+<li><a href="https://www.shopifynotes.com/shopifycategory/shopify-tips">Shopify小技巧</a></li>
+</ul>    </div>
+    </header>
+
+<div id="main">
+    <article class="col-md-8 col-md-offset-2 view clearfix">
+        <h1 class="view-title">如何从亚马逊/Opencart/WooCommerce等平台导入导出产品到Shopify？</h1>
+        <div class="view-meta">
+            <span>作者: Alex是大叔</span>
+            <span>分类: <a href="https://www.shopifynotes.com/shopifycategory/shopify-tips" rel="category tag">Shopify小技巧</a>,<a href="https://www.shopifynotes.com/shopifycategory/shopifynotes" rel="category tag">Shopify独立站操作笔记</a></span>
+            <span>发布时间: 2018-12-08 14:50</span>
+            <span></span>
+        </div>
+        <div class="view-content">
+<p>自从Shopify火了以后，各种厂家纷纷效仿推出了电商自建站的产品-<a href="https://www.bigcommerce.com" target="_blank" rel="noopener">BigCommerce</a>、<a href="https://woocommerce.com/" target="_blank" rel="noopener">WooCommerce</a>、<a href="https://magento.com" target="_blank" rel="noopener">Magento</a>、<a href="https://www.3dcart.com" target="_blank" rel="noopener">3dcart</a>等等。就连之前的拖拽建站网站：<a href="https://www.weebly.com/" target="_blank" rel="noopener">Weebly</a>，<a href="https://www.wix.com/" target="_blank" rel="noopener">Wix</a>等都进来插了一脚推出了电商建站服务。市场充分竞争对于我们广大电商从业者来说其实是好事，但是随着业务不断扩大、我们的SKU越来越多，一旦有了更换平台的想法就会变得非常麻烦。比如我已经做了亚马逊，想建Shopify独立站，或者我已经做Shopify很成功，现在不想花大量手续费，想自己搭建服务器转移到Opencart，但是有大量SKU需要手动传。。那么你就需要这个工具：</p>
+<blockquote><p><a href="http://www.shopping-cart-migration.com/#a_aid=alexshi" target="_blank" rel="noopener"><strong>Cart2Cart</strong></a></p></blockquote>
+<p>这是我自己在后期遇到的一个问题：有了技术以后，我已经不想受Shopify的平台约束，特别是支付方面，想转移到完全开源的Opencart，但是面对几百上千个SKU无从下手，于是通过搜索发现了这个网站-<a href="http://www.shopping-cart-migration.com/#a_aid=alexshi" target="_blank" rel="noopener">Cart2Cart</a>，在抱着怀疑的态度试用了以后完全被折服，确实厉害，果断付费，等了不到10分钟，所有产品准确无误的导入成功。。</p>
+<p>看了一眼官方支持的平台：</p>
+<p><img class="alignnone size-full wp-image-125" src="http://www.shopifynotes.com/wp-content/uploads/2018/12/cart2cart.jpg" alt="cart2cart" srcset="https://www.shopifynotes.com/wp-content/uploads/2018/12/cart2cart.jpg 800w, https://www.shopifynotes.com/wp-content/uploads/2018/12/cart2cart-300x266.jpg 300w, https://www.shopifynotes.com/wp-content/uploads/2018/12/cart2cart-768x680.jpg 768w" sizes="(max-width: 800px) 100vw, 800px" /></p>
+<p>厉害了，基本上市面上的所有电商平台都可以互相导入导出，这次我测试的是Shopify &gt;&gt; Opencart，具体流程如下：</p>
+<p>注册完成之后，到这个页面选择需要导入导出的平台：</p>
+<p><img class="alignnone size-full wp-image-126" src="http://www.shopifynotes.com/wp-content/uploads/2018/12/step1.jpg" alt="step1" srcset="https://www.shopifynotes.com/wp-content/uploads/2018/12/step1.jpg 704w, https://www.shopifynotes.com/wp-content/uploads/2018/12/step1-265x300.jpg 265w" sizes="(max-width: 704px) 100vw, 704px" /></p>
+<p>上边是要导出的平台，下边是要导入的平台。</p>
+<p>Shopify API Password是需要到Shopify &gt;&gt; APP创建一个新的APP并赋予所有权限，然后把API输入到这里。</p>
+<p>导入到Opencart需要在服务器端上传一个插件，具体看网站上讲的很清楚，如果有不懂的可以留言。</p>
+<p>接下来选择需要转移的产品属性：评论、分类、税、运费、历史订单、优惠券等等</p>
+<p><img class="alignnone size-full wp-image-127" src="http://www.shopifynotes.com/wp-content/uploads/2018/12/select-entities.png" alt="select-entities" srcset="https://www.shopifynotes.com/wp-content/uploads/2018/12/select-entities.png 594w, https://www.shopifynotes.com/wp-content/uploads/2018/12/select-entities-207x300.png 207w" sizes="(max-width: 594px) 100vw, 594px" /></p>
+<p>下边附加收费的按需选择，一般用不到</p>
+<p>接下来会免费的做一个测试，大概会上传20个产品左右</p>
+<p><img class="alignnone size-full wp-image-128" src="http://www.shopifynotes.com/wp-content/uploads/2018/12/demo-migration.png" alt="demo-migration" srcset="https://www.shopifynotes.com/wp-content/uploads/2018/12/demo-migration.png 603w, https://www.shopifynotes.com/wp-content/uploads/2018/12/demo-migration-300x154.png 300w" sizes="(max-width: 603px) 100vw, 603px" /></p>
+<p>确认产品上传无误之后，付费即可上传所有产品</p>
+<p><a href="http://www.shopping-cart-migration.com/#a_aid=alexshi" target="_blank" rel="noopener"><strong>点击这里</strong></a>可以获得估价：</p>
+<p><img class="alignnone size-full wp-image-130" src="http://www.shopifynotes.com/wp-content/uploads/2018/12/pricing.jpg" alt="pricing" srcset="https://www.shopifynotes.com/wp-content/uploads/2018/12/pricing.jpg 644w, https://www.shopifynotes.com/wp-content/uploads/2018/12/pricing-300x187.jpg 300w" sizes="(max-width: 644px) 100vw, 644px" /></p>
+<p>1000个产品以内最低$69美元，1000以上根据产品数量决定价格。个人感觉还不错，花钱买时间，而且上传的产品不会出错，值得推荐。</p>
+<p>&nbsp;</p>
+        </div>
+        <section class="view-tag">
+            <div class="pull-left"><i class="fa fa-tags"></i> <a href="https://www.shopifynotes.com/shopifytag/shopify%e6%95%99%e7%a8%8b" rel="tag">shopify教程</a></div>
+        </section>
+                <section id="comments">
+            
+<div class="comment-head clearfix">
+    <div class="pull-left">3条评论</div>
+    <div class="pull-right"><a href="#respond"><i class="fa fa-pencil"></i> 添加新评论</a></div>
+</div>
+<ul>
+    <li id="comment-li-237" class="comment_li">
+    <div id="comment-237">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/7fddb3094dde01d568331fc21968b5c6?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/7fddb3094dde01d568331fc21968b5c6?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">Eric</p>
+                <p class="comment_time">2018年12月10日 下午11:25</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify123.html?replytocom=237#respond' onclick='return addComment.moveForm( "comment-237", "237", "respond", "123" )' aria-label='回复给Eric'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>这个如果做dropping转移之后，还能自动下单吗？</p>
+</div>
+            </div>
+<ol class="children">
+<li id="comment-li-239" class="comment_li">
+    <div id="comment-239">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6bef6e75e17dc5569d6be386cb4f198d?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author"><a href='https://www.shopifynotes.com' rel='nofollow' target='_blank'>Alex是大叔</a></p>
+                <p class="comment_time">2018年12月11日 上午10:22</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify123.html?replytocom=239#respond' onclick='return addComment.moveForm( "comment-239", "239", "respond", "123" )' aria-label='回复给Alex是大叔'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>不能了，dropshipping不建议换平台，就用shopify最好</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<li id="comment-li-391" class="comment_li">
+    <div id="comment-391">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><img alt='' src='https://secure.gravatar.com/avatar/d1df1667cd15991928eb298b20cd67b8?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/d1df1667cd15991928eb298b20cd67b8?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+            <div class="pull-left">
+                <p class="comment_author">cecilia</p>
+                <p class="comment_time">2019年2月18日 下午8:49</p>
+            </div>
+            <div class="pull-right"><a rel='nofollow' class='comment-reply-link' href='https://www.shopifynotes.com/shopify123.html?replytocom=391#respond' onclick='return addComment.moveForm( "comment-391", "391", "respond", "123" )' aria-label='回复给cecilia'>回复TA</a> </div>
+        </div>
+        <div class="comment_text"><p>哈哈，厉害了，最近这几天正愁呢，shopify网站建好了，但是由于我卖仿品，怕被封，就想怎么把建好的网站给移到其他平台去。</p>
+</div>
+            </div>
+</li><!-- #comment-## -->
+</ul>
+	<div id="respond" class="comment-respond">
+		<h4 id="reply-title" class="comment-reply-title">发表评论 <small><a rel="nofollow" id="cancel-comment-reply-link" href="/shopify123.html?User-Agent=Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%3B+rv%3A65.0%29+Gecko%2F20100101+Firefox%2F65.0#respond" style="display:none;">取消回复</a></small></h4>			<form action="https://www.shopifynotes.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+				<p class="comment-notes"><span id="email-notes">电子邮件地址不会被公开。</span> 必填项已用<span class="required">*</span>标注</p><div class="comment form-group has-feedback"><textarea class="form-control" id="comment" placeholder=" " name="comment" rows="5" aria-required="true" required  onkeydown="if(event.ctrlKey){if(event.keyCode==13){document.getElementById('submit').click();return false}};"></textarea></div><div class="comment-form-author form-group has-feedback"><div class="input-group"><div class="input-group-addon"><i class="fa fa-user"></i></div><input class="form-control" placeholder="昵称" id="author" name="author" type="text" value="" " size="30" /><span class="form-control-feedback required">*</span></div></div>
+<div class="comment-form-email form-group has-feedback"><div class="input-group"><div class="input-group-addon"><i class="fa fa-envelope-o"></i></div><input class="form-control" placeholder="邮箱" id="email" name="email" type="text" value="" " size="30" /><span class="form-control-feedback required">*</span></div></div>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="btn btn-primary" value="发表评论" /> <input type='hidden' name='comment_post_ID' value='123' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="81f0ba74ec" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="209"/></p>			</form>
+			</div><!-- #respond -->
+	        </section>
+    </article>
+    <section class="col-md-8 col-md-offset-2 clearfix">
+    <div class="read">
+        <div class="read-head"> <i class="fa fa-book"></i> 更多阅读 </div>
+        <div class="read-list row">
+            <div class="col-md-6">
+                <ul>
+                                    </ul>
+            </div>
+            <div class="col-md-6">
+                <ul>
+                                    <li><a href="https://www.shopifynotes.com/shopify106.html" title="Dropshipping怎么做？95%卖家都不知道可以如此简单">Dropshipping怎么做？95%卖家都不知道可以如此简单</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify50.html" title="shopify独立站开店必看教程 &#8211; 这些坑你不用再趟一遍">shopify独立站开店必看教程 &#8211; 这些坑你不用再趟一遍</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify51.html" title="shopify开店必备app推荐 &#8211; 这些app能大幅提升ROI">shopify开店必备app推荐 &#8211; 这些app能大幅提升ROI</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify123.html" title="如何从亚马逊/Opencart/WooCommerce等平台导入导出产品到Shopify？">如何从亚马逊/Opencart/WooCommerce等平台导入导出产品到Shopify？</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify78.html" title="使用google analytics优化你的每一条facebook广告">使用google analytics优化你的每一条facebook广告</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify57.html" title="Shopify在Facebook测产品到底用Website conversion(WC)还是Post engagement(PPE)">Shopify在Facebook测产品到底用Website conversion(WC)还是Post engagement(PPE)</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify36.html" title="如何一键批量无损压缩产品图片">如何一键批量无损压缩产品图片</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify158.html" title="Shopify爆款案例研究 &#8211; 老产品也能月入10万？">Shopify爆款案例研究 &#8211; 老产品也能月入10万？</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify55.html" title="shopify收款方式之 &#8211; Paypal那些坑">shopify收款方式之 &#8211; Paypal那些坑</a></li>
+                                    <li><a href="https://www.shopifynotes.com/shopify66.html" title="大叔教你如何分析一个竞品Shopify店铺">大叔教你如何分析一个竞品Shopify店铺</a></li>
+                                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="read">
+        <div class="read-head"> <i class="fa fa-tags"></i> 标签云 </div>
+        <div class="read-list">
+            <a href="https://www.shopifynotes.com/shopifytag/dropshipping%e6%95%99%e7%a8%8b" class="tag-cloud-link tag-link-29 tag-link-position-1" style="font-size: 10.863636363636pt;" aria-label="dropshipping教程 (2个项目)">dropshipping教程</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook-spy%e5%b7%a5%e5%85%b7" class="tag-cloud-link tag-link-26 tag-link-position-2" style="font-size: 8pt;" aria-label="facebook spy工具 (1个项目)">facebook spy工具</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e5%86%8d%e8%90%a5%e9%94%80" class="tag-cloud-link tag-link-25 tag-link-position-3" style="font-size: 8pt;" aria-label="facebook再营销 (1个项目)">facebook再营销</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e5%b9%bf%e5%91%8a" class="tag-cloud-link tag-link-20 tag-link-position-4" style="font-size: 12.772727272727pt;" aria-label="facebook广告 (3个项目)">facebook广告</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e5%b9%bf%e5%91%8aspy" class="tag-cloud-link tag-link-27 tag-link-position-5" style="font-size: 8pt;" aria-label="facebook广告spy (1个项目)">facebook广告spy</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e5%b9%bf%e5%91%8a%e6%95%99%e7%a8%8b" class="tag-cloud-link tag-link-10 tag-link-position-6" style="font-size: 12.772727272727pt;" aria-label="facebook广告教程 (3个项目)">facebook广告教程</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e6%8e%a8%e5%b9%bf" class="tag-cloud-link tag-link-21 tag-link-position-7" style="font-size: 10.863636363636pt;" aria-label="facebook推广 (2个项目)">facebook推广</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e6%95%99%e7%a8%8b" class="tag-cloud-link tag-link-14 tag-link-position-8" style="font-size: 12.772727272727pt;" aria-label="facebook教程 (3个项目)">facebook教程</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e7%94%b5%e5%95%86%e5%b9%bf%e5%91%8a" class="tag-cloud-link tag-link-7 tag-link-position-9" style="font-size: 14.363636363636pt;" aria-label="facebook电商广告 (4个项目)">facebook电商广告</a>
+<a href="https://www.shopifynotes.com/shopifytag/facebook%e8%87%aa%e5%8a%a8%e5%88%a0%e5%b7%ae%e8%af%84" class="tag-cloud-link tag-link-15 tag-link-position-10" style="font-size: 8pt;" aria-label="facebook自动删差评 (1个项目)">facebook自动删差评</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify-app" class="tag-cloud-link tag-link-18 tag-link-position-11" style="font-size: 8pt;" aria-label="shopify app (1个项目)">shopify app</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify-dropshipping" class="tag-cloud-link tag-link-28 tag-link-position-12" style="font-size: 8pt;" aria-label="shopify dropshipping (1个项目)">shopify dropshipping</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e5%86%8d%e8%90%a5%e9%94%80" class="tag-cloud-link tag-link-24 tag-link-position-13" style="font-size: 8pt;" aria-label="shopify再营销 (1个项目)">shopify再营销</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e5%b9%bf%e5%91%8a" class="tag-cloud-link tag-link-8 tag-link-position-14" style="font-size: 14.363636363636pt;" aria-label="shopify广告 (4个项目)">shopify广告</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e5%bc%80%e5%ba%97" class="tag-cloud-link tag-link-5 tag-link-position-15" style="font-size: 15.636363636364pt;" aria-label="shopify开店 (5个项目)">shopify开店</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e5%bc%95%e6%b5%81" class="tag-cloud-link tag-link-9 tag-link-position-16" style="font-size: 10.863636363636pt;" aria-label="shopify引流 (2个项目)">shopify引流</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e6%8a%80%e5%b7%a7" class="tag-cloud-link tag-link-13 tag-link-position-17" style="font-size: 12.772727272727pt;" aria-label="shopify技巧 (3个项目)">shopify技巧</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e6%8e%a8%e5%b9%bf" class="tag-cloud-link tag-link-6 tag-link-position-18" style="font-size: 19.772727272727pt;" aria-label="shopify推广 (10个项目)">shopify推广</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e6%8f%92%e4%bb%b6" class="tag-cloud-link tag-link-19 tag-link-position-19" style="font-size: 8pt;" aria-label="shopify插件 (1个项目)">shopify插件</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e6%94%af%e4%bb%98" class="tag-cloud-link tag-link-17 tag-link-position-20" style="font-size: 12.772727272727pt;" aria-label="shopify支付 (3个项目)">shopify支付</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e6%94%b6%e6%ac%be" class="tag-cloud-link tag-link-16 tag-link-position-21" style="font-size: 12.772727272727pt;" aria-label="shopify收款 (3个项目)">shopify收款</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e6%95%99%e7%a8%8b" class="tag-cloud-link tag-link-4 tag-link-position-22" style="font-size: 22pt;" aria-label="shopify教程 (14个项目)">shopify教程</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e7%8b%ac%e7%ab%8b%e7%ab%99" class="tag-cloud-link tag-link-3 tag-link-position-23" style="font-size: 8pt;" aria-label="shopify独立站 (1个项目)">shopify独立站</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e7%ab%9e%e4%ba%89%e5%af%b9%e6%89%8b" class="tag-cloud-link tag-link-23 tag-link-position-24" style="font-size: 8pt;" aria-label="shopify竞争对手 (1个项目)">shopify竞争对手</a>
+<a href="https://www.shopifynotes.com/shopifytag/shopify%e7%ab%9e%e5%93%81%e5%88%86%e6%9e%90" class="tag-cloud-link tag-link-22 tag-link-position-25" style="font-size: 8pt;" aria-label="shopify竞品分析 (1个项目)">shopify竞品分析</a>        </div>
+    </div>
+    </section>
+</div>
+<!--modal-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content single-dashang">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-cny" aria-hidden="true"></i> 打赏支持</h4>
+            </div>
+            <div class="modal-body text-center">
+                <p><img border="0" src="https://tangjie.me/media/AliPay.png"><img border="0" src="https://www.shopifynotes.com/wp-content/uploads/2018/08/%E6%89%93%E8%B5%8F.png"></p>
+                <p>扫描二维码，输入您要打赏的金额</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--modal-->
+
+<div class="footer_search visible-xs visible-sm">
+    <form id="searchform" action="https://www.shopifynotes.com">
+        <div class="input-group">
+            <input type="search" class="form-control" placeholder="搜索…" value="" name="s">
+            <span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button></span>
+        </div>
+    </form>
+</div><!--
+<footer id="footer">
+    <div class="copyright">
+        <p><i class="fa fa-copyright" aria-hidden="true"></i> 2018 <b>产品经理@唐杰</b></p>
+        <p>Powered by <b>WordPress</b>.</p>
+    </div>
+    <div style="display:none;">代码在页面底部，统计标识不会显示，但不影响统计效果</div>
+</footer> -->
+<script type="text/javascript" src="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/js/skel.min.js"></script>
+<script type="text/javascript" src="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/js/util.min.js"></script>
+<script type="text/javascript" src="https://www.shopifynotes.com/wp-content/themes/JieStyle-Two-master/js/nav.js"></script>
+<script type='text/javascript' src='https://www.shopifynotes.com/wp-includes/js/comment-reply.min.js?ver=4.9.13'></script>
+<script async="async" type='text/javascript' src='https://www.shopifynotes.com/wp-content/plugins/akismet/_inc/form.js?ver=4.1.2'></script>
+<script>
+$(function() {
+    $('[data-toggle="tooltip"]').tooltip()
+});
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+</body>
+</html>

@@ -4,7 +4,10 @@ from requests_html import HTMLSession
 import csv
 sess=HTMLSession()
 r=sess.get('https://movie.douban.com/subject/1292052/')
-title=r.html.find('#content > h1:nth-child(3) > span:nth-child(1)',first=True)
+#content > h1 > span:nth-child(1)
+#content > h1 > span:nth-child(1)
+#content > h1:nth-child(3) > span:nth-child(1)
+title=r.html.find('#content > h1 > span:nth-child(1)',first=True)
 print(title.text)
 url='https://movie.douban.com/subject/'
 link1=[url+'1292052/',url+'1291546/',url+'1295644']
