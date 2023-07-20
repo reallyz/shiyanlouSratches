@@ -159,7 +159,7 @@ pycurl==7.43.0.2
 pydotplus==2.0.2
 pyee==6.0.0
 pyflakes==2.0.0
-Pygments==2.3.1
+Pygments==2.15.0
 PyInstaller==3.4
 pylint==2.2.2
 pyodbc==4.0.25
